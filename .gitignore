@@ -1,0 +1,10 @@
+.superpowers/
+.codex-brief-render/
+node_modules/
+.next/
+out/
+.vercel/
+*.log
+.env*
+!.env.example
+
