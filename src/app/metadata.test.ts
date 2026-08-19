@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { createRobots } from "./robots";
 import sitemap from "./sitemap";
 import { getProjectSlugs } from "@/lib/portfolio";
 import { createSiteMetadata, socialImageMetadataForSite } from "@/lib/site-metadata";
@@ -18,6 +19,21 @@ describe("sitemap", () => {
         ...getProjectSlugs().map((slug) => `http://localhost:3000/projects/${slug}`),
       ]),
     );
+  });
+});
+
+describe("createRobots", () => {
+  it("disallows crawling when a production identity URL is unavailable", () => {
+    expect(createRobots(undefined)).toEqual({
+      rules: { userAgent: "*", disallow: "/" },
+    });
+  });
+
+  it("allows crawling and exposes the sitemap when a site URL is configured", () => {
+    expect(createRobots("https://portfolio.example.test")).toEqual({
+      rules: { userAgent: "*", allow: "/" },
+      sitemap: "https://portfolio.example.test/sitemap.xml",
+    });
   });
 });
 
