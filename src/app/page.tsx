@@ -1,3 +1,3 @@
 export default function HomePage() {
-  return <main>Portfolio foundation</main>;
+  return <p>Portfolio foundation</p>;
 }

@@ -32,7 +32,9 @@ export default function RootLayout({
       <body className={`${sans.variable} ${display.variable}`}>
         <SkipLink />
         <SiteHeader />
-        <main id="main-content">{children}</main>
+        <main id="main-content" tabIndex={-1}>
+          {children}
+        </main>
         <SiteFooter />
       </body>
     </html>
