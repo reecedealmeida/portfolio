@@ -3,9 +3,12 @@
 node_modules/
 .pnpm-store/
 *.tsbuildinfo
+next-env.d.ts
 .next/
 out/
 .vercel/
+playwright-report/
+test-results/
 *.log
 .env*
 !.env.example

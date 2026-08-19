@@ -9,6 +9,7 @@ type ProjectCardProps = {
 export function ProjectCard({ project, priority = false }: ProjectCardProps) {
   return (
     <Link
+      aria-label={project.title}
       className={`project-card${priority ? " project-card--priority" : ""}`}
       href={`/projects/${project.slug}`}
     >
