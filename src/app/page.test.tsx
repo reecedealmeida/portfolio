@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
+import { portfolio } from "@/content/portfolio";
 import HomePage from "./page";
 
 describe("HomePage", () => {
@@ -13,5 +14,28 @@ describe("HomePage", () => {
     expect(
       screen.getByRole("link", { name: "Explore selected work" }),
     ).toHaveAttribute("href", "#selected-work");
+  });
+
+  it("renders evidence principles from the canonical portfolio content", () => {
+    const originalPrinciples = portfolio.home.evidencePrinciples;
+    portfolio.home.evidencePrinciples = [
+      {
+        number: "01",
+        title: "Configured principle",
+        detail: "This copy came from the canonical content source.",
+      },
+    ];
+
+    try {
+      render(<HomePage />);
+      expect(
+        screen.getByText("Configured principle", { selector: "strong" }),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText("This copy came from the canonical content source."),
+      ).toBeInTheDocument();
+    } finally {
+      portfolio.home.evidencePrinciples = originalPrinciples;
+    }
   });
 });

@@ -4,7 +4,7 @@ import { visibleSocialLinks } from "@/lib/portfolio";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Current professional contact details for Reece DeAlmeida.",
+  description: `Current professional contact details for ${portfolio.person.name}.`,
 };
 
 export default function ContactPage() {

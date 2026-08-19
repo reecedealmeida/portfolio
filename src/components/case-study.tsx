@@ -109,7 +109,18 @@ export function CaseStudy({ project }: CaseStudyProps) {
               >
                 <p className="eyebrow">System view</p>
                 <h2 id="system-view-title">A concise view of the workflow.</h2>
-                <ProjectDiagram diagram={project.diagram} />
+                <p className="technical-diagram-hint" id="technical-diagram-hint">
+                  Scroll horizontally to view the complete diagram.
+                </p>
+                <div
+                  aria-describedby="technical-diagram-hint"
+                  aria-label="Scrollable system diagram"
+                  className="technical-diagram-scroll"
+                  role="region"
+                  tabIndex={0}
+                >
+                  <ProjectDiagram diagram={project.diagram} />
+                </div>
               </section>
             ) : null}
 

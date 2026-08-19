@@ -10,29 +10,6 @@ import { resolveSiteUrl } from "@/lib/site-url";
 
 export const metadata = socialImageMetadataForSite(resolveSiteUrl());
 
-const evidencePrinciples = [
-  {
-    number: "01",
-    title: "Constraints",
-    detail: "Define the flight envelope and competing requirements.",
-  },
-  {
-    number: "02",
-    title: "Ownership",
-    detail: "Separate confirmed contribution from team context.",
-  },
-  {
-    number: "03",
-    title: "Testing",
-    detail: "Connect decisions to checks, data, and acceptance criteria.",
-  },
-  {
-    number: "04",
-    title: "Iteration",
-    detail: "Record what changed and what the next build should improve.",
-  },
-] as const;
-
 export default function HomePage() {
   return (
     <>
@@ -113,7 +90,7 @@ export default function HomePage() {
             </h2>
           </div>
           <ol className="principles__list">
-            {evidencePrinciples.map((principle) => (
+            {portfolio.home.evidencePrinciples.map((principle) => (
               <li key={principle.number}>
                 <span className="principles__number">{principle.number}</span>
                 <strong>{principle.title}</strong>

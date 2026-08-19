@@ -108,6 +108,8 @@ button {
 
 .site-brand {
   display: inline-flex;
+  justify-content: center;
+  min-height: 2.75rem;
   flex-direction: column;
   color: var(--ink);
   line-height: 1.05;
@@ -137,6 +139,9 @@ button {
 }
 
 .primary-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
   padding-block: 0.4rem;
   color: var(--ink-soft);
   font-size: 0.8rem;
@@ -486,7 +491,9 @@ button {
 }
 
 .text-link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
   color: var(--accent-dark);
   font-size: 0.78rem;
   font-weight: 700;
@@ -709,7 +716,8 @@ button {
   color: var(--ink);
 }
 
-.contact-cta .button:hover {
+.contact-cta .button:hover,
+.contact-cta .button:focus-visible {
   border-color: #ef9a72;
   background: #ef9a72;
 }
@@ -963,6 +971,10 @@ button {
   padding-block: var(--section-space);
 }
 
+.case-study__content {
+  min-width: 0;
+}
+
 .case-study__index {
   align-self: start;
   position: sticky;
@@ -985,7 +997,9 @@ button {
 }
 
 .case-study__index a {
-  display: block;
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
   padding-block: 0.65rem;
   color: var(--ink-soft);
   font-size: 0.78rem;
@@ -1053,9 +1067,18 @@ button {
   scroll-margin-top: 2rem;
 }
 
+.technical-diagram-scroll {
+  margin-top: 2rem;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+
+.technical-diagram-hint {
+  display: none;
+}
+
 .technical-diagram {
   width: 100%;
-  margin-top: 2rem;
   border: 1px solid var(--line);
   background: var(--paper-raised);
 }
@@ -1201,6 +1224,23 @@ button {
 }
 
 @media (max-width: 42rem) {
+  .technical-diagram-hint {
+    display: block;
+    margin: 1rem 0 0;
+    color: var(--ink-soft);
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  .technical-diagram-hint + .technical-diagram-scroll {
+    margin-top: 0.75rem;
+  }
+
+  .technical-diagram-scroll .technical-diagram {
+    width: 45rem;
+    max-width: none;
+  }
+
   .site-header__inner,
   .site-footer__inner {
     align-items: flex-start;

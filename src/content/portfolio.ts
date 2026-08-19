@@ -48,7 +48,12 @@ export type PortfolioContent = {
   site: { url: string; description: string };
   social: SocialLink[];
   resume: { state: "available" | "needed"; href: string; request: string };
-  home: { eyebrow: string; headline: string; introduction: string };
+  home: {
+    eyebrow: string;
+    headline: string;
+    introduction: string;
+    evidencePrinciples: { number: string; title: string; detail: string }[];
+  };
   about: {
     paragraphs: string[];
     focusAreas: string[];
@@ -93,6 +98,28 @@ export const portfolio: PortfolioContent = {
     headline: "Engineering through building, testing, and iteration.",
     introduction:
       "An early-career aerospace engineering student with a technical foundation in high-powered rocketry, avionics, embedded systems, software infrastructure, and live technical operations. This portfolio prioritizes specific work, constraints, testing, and evidence over unsupported claims.",
+    evidencePrinciples: [
+      {
+        number: "01",
+        title: "Constraints",
+        detail: "Define the flight envelope and competing requirements.",
+      },
+      {
+        number: "02",
+        title: "Ownership",
+        detail: "Separate confirmed contribution from team context.",
+      },
+      {
+        number: "03",
+        title: "Testing",
+        detail: "Connect decisions to checks, data, and acceptance criteria.",
+      },
+      {
+        number: "04",
+        title: "Iteration",
+        detail: "Record what changed and what the next build should improve.",
+      },
+    ],
   },
   about: {
     paragraphs: [
