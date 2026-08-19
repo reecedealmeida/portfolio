@@ -18,6 +18,10 @@ describe("SiteHeader", () => {
       "href",
       "/experience",
     );
+    expect(screen.getByRole("link", { name: "Résumé" })).toHaveAttribute(
+      "href",
+      "/contact#resume",
+    );
     expect(screen.getByRole("link", { name: "Contact" })).toHaveAttribute(
       "href",
       "/contact",

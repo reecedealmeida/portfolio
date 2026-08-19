@@ -33,5 +33,8 @@ describe("ExperiencePage", () => {
         name: /Occasional support for the next round of builders/i,
       }),
     ).toBeInTheDocument();
+    expect(container.querySelector("#technical-theatre")).toContainElement(
+      page.getByRole("heading", { name: /Live operations under pressure/i }),
+    );
   });
 });

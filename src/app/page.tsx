@@ -5,12 +5,23 @@ import { OrbitalHero } from "@/components/diagrams/orbital-hero";
 import { ProjectGrid } from "@/components/project-grid";
 import { Reveal } from "@/components/reveal";
 import { portfolio } from "@/content/portfolio";
-import { socialImageMetadataForSite } from "@/lib/site-metadata";
+import {
+  canonicalMetadataForPath,
+  socialImageMetadataForSite,
+} from "@/lib/site-metadata";
 import { resolveSiteUrl } from "@/lib/site-url";
 
-export const metadata = socialImageMetadataForSite(resolveSiteUrl());
+const siteUrl = resolveSiteUrl();
+
+export const metadata = {
+  ...canonicalMetadataForPath(siteUrl, "/"),
+  ...socialImageMetadataForSite(siteUrl),
+};
 
 export default function HomePage() {
+  const resumeIsAvailable =
+    portfolio.resume.state === "available" && portfolio.resume.href.trim().length > 0;
+
   return (
     <>
       <section className="home-hero section">
@@ -23,13 +34,19 @@ export default function HomePage() {
               <Link className="button" href="#selected-work">
                 Explore selected work
               </Link>
-              <Link className="button button--secondary" href="/contact">
-                Contact
-              </Link>
+              {resumeIsAvailable ? (
+                <a className="button button--secondary" href={portfolio.resume.href}>
+                  Download résumé
+                </a>
+              ) : (
+                <Link className="button button--secondary" href="/contact#resume">
+                  Résumé
+                </Link>
+              )}
             </div>
             <p className="home-hero__status">
               <span>Résumé</span>
-              {portfolio.resume.state === "available"
+              {resumeIsAvailable
                 ? "Current PDF available"
                 : "Current PDF requested before publishing"}
             </p>
@@ -56,6 +73,7 @@ export default function HomePage() {
             <ProjectGrid featuredOnly projects={portfolio.projects} />
 
             <Link
+              aria-label="Technical theatre systems and leadership"
               className="theatre-feature"
               href="/experience#technical-theatre"
             >

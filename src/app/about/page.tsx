@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { ContactCta } from "@/components/contact-cta";
 import { portfolio } from "@/content/portfolio";
+import { canonicalMetadataForPath } from "@/lib/site-metadata";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 export const metadata: Metadata = {
   title: "About",
   description: portfolio.about.paragraphs[0],
+  ...canonicalMetadataForPath(resolveSiteUrl(), "/about"),
 };
 
 export default function AboutPage() {

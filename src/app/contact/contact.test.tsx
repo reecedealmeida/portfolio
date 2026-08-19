@@ -4,9 +4,10 @@ import ContactPage from "./page";
 
 describe("ContactPage", () => {
   it("shows setup guidance instead of broken personal links", () => {
-    render(<ContactPage />);
+    const { container } = render(<ContactPage />);
 
     expect(screen.getByText(/Contact details are ready to add/i)).toBeInTheDocument();
     expect(screen.queryByRole("link", { name: /download résumé/i })).not.toBeInTheDocument();
+    expect(container.querySelector("#resume")).toBeInTheDocument();
   });
 });

@@ -7,6 +7,7 @@
   --accent: #d85f35;
   --accent-dark: #a94020;
   --max-width: 80rem;
+  --header-height: 5.5rem;
   --page-pad: clamp(1.25rem, 4vw, 4.5rem);
   --section-space: clamp(5rem, 10vw, 9rem);
 }
@@ -78,7 +79,7 @@ button {
 
 .skip-link {
   position: fixed;
-  z-index: 10;
+  z-index: 30;
   top: 0.75rem;
   left: 0.75rem;
   transform: translateY(-150%);
@@ -95,7 +96,7 @@ button {
 
 .site-header {
   border-bottom: 1px solid var(--line);
-  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  background: color-mix(in srgb, var(--paper) 97%, white 3%);
 }
 
 .site-header__inner {
@@ -184,6 +185,13 @@ button {
   color: var(--accent-dark);
 }
 
+.site-footer__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding-inline: 0.15rem;
+}
+
 .eyebrow {
   color: var(--accent-dark);
   font-size: 0.75rem;
@@ -221,6 +229,11 @@ button {
 
 .section--line {
   border-top: 1px solid var(--line);
+}
+
+section[id],
+aside[id] {
+  scroll-margin-top: calc(var(--header-height) + 2rem);
 }
 
 .button {
@@ -978,7 +991,7 @@ button {
 .case-study__index {
   align-self: start;
   position: sticky;
-  top: 1.5rem;
+  top: calc(var(--header-height) + 1.5rem);
 }
 
 .case-study__index .eyebrow {
@@ -1074,7 +1087,14 @@ button {
 }
 
 .technical-diagram-hint {
-  display: none;
+  margin: 1rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.technical-diagram-hint + .technical-diagram-scroll {
+  margin-top: 0.75rem;
 }
 
 .technical-diagram {
@@ -1224,23 +1244,6 @@ button {
 }
 
 @media (max-width: 42rem) {
-  .technical-diagram-hint {
-    display: block;
-    margin: 1rem 0 0;
-    color: var(--ink-soft);
-    font-size: 0.8rem;
-    font-weight: 700;
-  }
-
-  .technical-diagram-hint + .technical-diagram-scroll {
-    margin-top: 0.75rem;
-  }
-
-  .technical-diagram-scroll .technical-diagram {
-    width: 45rem;
-    max-width: none;
-  }
-
   .site-header__inner,
   .site-footer__inner {
     align-items: flex-start;
@@ -1276,6 +1279,11 @@ button {
 
   .case-study__index {
     position: static;
+  }
+
+  section[id],
+  aside[id] {
+    scroll-margin-top: 2rem;
   }
 
   .evidence-grid {
@@ -1385,6 +1393,21 @@ button {
 
   .experience-card ul {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 42.01rem) {
+  .site-header {
+    position: sticky;
+    z-index: 20;
+    top: 0;
+  }
+}
+
+@media (max-width: 64rem) {
+  .technical-diagram-scroll .technical-diagram {
+    width: 45rem;
+    max-width: none;
   }
 }
 

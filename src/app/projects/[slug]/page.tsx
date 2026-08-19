@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CaseStudy } from "@/components/case-study";
 import { getProject, getProjectSlugs } from "@/lib/portfolio";
+import { canonicalMetadataForPath } from "@/lib/site-metadata";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 type ProjectPageProps = {
   params: Promise<{ slug: string }>;
@@ -24,6 +26,7 @@ export async function generateMetadata({
   return {
     title: project.title,
     description: project.summary,
+    ...canonicalMetadataForPath(resolveSiteUrl(), `/projects/${project.slug}`),
   };
 }
 

@@ -14,7 +14,7 @@ export function SiteFooter() {
         {socialLinks.length > 0 ? (
           <nav aria-label="Social links" className="site-footer__links">
             {socialLinks.map((link) => (
-              <a href={link.href} key={link.label}>
+              <a className="site-footer__link" href={link.href} key={link.label}>
                 {link.label}
               </a>
             ))}

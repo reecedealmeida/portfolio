@@ -2,11 +2,14 @@ import type { Metadata } from "next";
 import { ContactCta } from "@/components/contact-cta";
 import { ProjectGrid } from "@/components/project-grid";
 import { portfolio } from "@/content/portfolio";
+import { canonicalMetadataForPath } from "@/lib/site-metadata";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 export const metadata: Metadata = {
   title: "Projects",
   description:
     "Engineering case studies covering rocketry, avionics, systems migration, and software infrastructure.",
+  ...canonicalMetadataForPath(resolveSiteUrl(), "/projects"),
 };
 
 export default function ProjectsPage() {

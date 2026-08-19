@@ -1,5 +1,25 @@
 import { expect, test } from "@playwright/test";
 
+const projectRoutes = [
+  "/projects/systemsgo-tsiolkovsky",
+  "/projects/systemsgo-oberth",
+  "/projects/alphalete-systems-migration",
+  "/projects/containerized-infrastructure",
+];
+
+test("every indexable route emits its own canonical URL", async ({ page }) => {
+  const routes = ["/", "/about", "/experience", "/projects", "/contact", ...projectRoutes];
+
+  for (const route of routes) {
+    await page.goto(route);
+    const href = await page.locator("link[rel='canonical']").getAttribute("href");
+    expect(href).not.toBeNull();
+    const canonical = new URL(href!);
+    expect(canonical.origin).toBe("http://localhost:3000");
+    expect(canonical.pathname).toBe(route);
+  }
+});
+
 test("recruiter can reach the two primary case studies", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Engineering through building");
@@ -84,4 +104,89 @@ test("mobile workflow diagrams stay legible without overflowing the page", async
   expect(diagramMetrics.diagramWidth).toBeGreaterThanOrEqual(720);
   expect(diagramMetrics.scrollWidth).toBeGreaterThan(diagramMetrics.containerWidth);
   expect(diagramMetrics.pageScrollWidth).toBe(diagramMetrics.pageClientWidth);
+});
+
+test("tablet workflow diagrams keep readable labels inside a contained scroller", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 768, height: 1024 });
+  await page.goto("/projects/systemsgo-tsiolkovsky");
+
+  const metrics = await page.locator(".technical-diagram-scroll").evaluate((element) => {
+    const label = element.querySelector(".technical-diagram__node text");
+    return {
+      labelSize: label ? Number.parseFloat(getComputedStyle(label).fontSize) : 0,
+      documentClientWidth: document.documentElement.clientWidth,
+      documentScrollWidth: document.documentElement.scrollWidth,
+      containerWidth: element.clientWidth,
+      scrollWidth: element.scrollWidth,
+    };
+  });
+
+  expect(metrics.labelSize).toBeGreaterThanOrEqual(16);
+  expect(metrics.scrollWidth).toBeGreaterThan(metrics.containerWidth);
+  expect(metrics.documentScrollWidth).toBe(metrics.documentClientWidth);
+});
+
+test("desktop header and case-study index stay useful around fragment navigation", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/projects/systemsgo-tsiolkovsky");
+
+  await expect(page.locator(".site-header")).toHaveCSS("position", "sticky");
+  await expect(page.locator(".case-study__index")).toHaveCSS("position", "sticky");
+  await page.getByRole("link", { name: "Testing & verification" }).click();
+
+  const offsets = await page.locator("#testing").evaluate((target) => {
+    const header = document.querySelector(".site-header");
+    return {
+      headerBottom: header?.getBoundingClientRect().bottom ?? 0,
+      targetTop: target.getBoundingClientRect().top,
+    };
+  });
+  expect(offsets.targetTop).toBeGreaterThanOrEqual(offsets.headerBottom);
+
+  await page.goto("/");
+  const theatreFeature = page.getByRole("link", {
+    name: "Technical theatre systems and leadership",
+  });
+  await expect(theatreFeature).toHaveAttribute("href", "/experience#technical-theatre");
+  await theatreFeature.click();
+  await expect(page).toHaveURL(/\/experience#technical-theatre$/);
+  await expect(page.locator("#technical-theatre")).toBeVisible();
+});
+
+test("diagram regions are focusable only when horizontal scrolling is available", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/projects/systemsgo-tsiolkovsky");
+  await expect(page.locator(".technical-diagram-scroll")).not.toHaveAttribute("tabindex");
+  await expect(
+    page.getByText("Scroll horizontally to view the complete diagram."),
+  ).toHaveCount(0);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(page.locator(".technical-diagram-scroll")).toHaveAttribute("tabindex", "0");
+  await expect(
+    page.getByText("Scroll horizontally to view the complete diagram."),
+  ).toBeVisible();
+});
+
+test("configured footer social-link styling provides a practical target", async ({ page }) => {
+  await page.goto("/");
+  const height = await page.locator(".site-footer").evaluate((footer) => {
+    const nav = document.createElement("nav");
+    nav.className = "site-footer__links";
+    const link = document.createElement("a");
+    link.className = "site-footer__link";
+    link.href = "https://example.test/profile";
+    link.textContent = "Profile";
+    nav.append(link);
+    footer.append(nav);
+    return link.getBoundingClientRect().height;
+  });
+
+  expect(height).toBeGreaterThanOrEqual(44);
 });

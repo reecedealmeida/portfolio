@@ -2,7 +2,11 @@ import { describe, expect, it } from "vitest";
 import { createRobots } from "./robots";
 import sitemap from "./sitemap";
 import { getProjectSlugs } from "@/lib/portfolio";
-import { createSiteMetadata, socialImageMetadataForSite } from "@/lib/site-metadata";
+import {
+  canonicalMetadataForPath,
+  createSiteMetadata,
+  socialImageMetadataForSite,
+} from "@/lib/site-metadata";
 import { resolveSiteUrl } from "@/lib/site-url";
 
 describe("sitemap", () => {
@@ -50,6 +54,20 @@ describe("createSiteMetadata", () => {
 
     expect(metadata.openGraph?.images).toEqual([]);
     expect(metadata.twitter?.images).toEqual([]);
+  });
+});
+
+describe("canonicalMetadataForPath", () => {
+  it("builds a route-specific canonical URL from a configured site identity", () => {
+    expect(
+      canonicalMetadataForPath("https://portfolio.example.test", "/about"),
+    ).toEqual({
+      alternates: { canonical: "https://portfolio.example.test/about" },
+    });
+  });
+
+  it("omits canonical metadata when the site identity cannot be resolved", () => {
+    expect(canonicalMetadataForPath(undefined, "/about")).toEqual({});
   });
 });
 

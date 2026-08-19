@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { portfolio } from "@/content/portfolio";
 import { visibleSocialLinks } from "@/lib/portfolio";
+import { canonicalMetadataForPath } from "@/lib/site-metadata";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 export const metadata: Metadata = {
   title: "Contact",
   description: `Current professional contact details for ${portfolio.person.name}.`,
+  ...canonicalMetadataForPath(resolveSiteUrl(), "/contact"),
 };
 
 export default function ContactPage() {
@@ -33,7 +36,7 @@ export default function ContactPage() {
           )}
         </div>
 
-        <aside aria-labelledby="resume-title" className="contact-page__resume">
+        <aside aria-labelledby="resume-title" className="contact-page__resume" id="resume">
           <p className="eyebrow">Résumé</p>
           <h2 className="section-title" id="resume-title">
             Current engineering résumé

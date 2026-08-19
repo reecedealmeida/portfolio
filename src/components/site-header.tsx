@@ -5,6 +5,7 @@ const primaryRoutes = [
   { href: "/projects", label: "Work" },
   { href: "/about", label: "About" },
   { href: "/experience", label: "Experience" },
+  { href: "/contact#resume", label: "Résumé" },
   { href: "/contact", label: "Contact" },
 ] as const;
 

@@ -8,6 +8,21 @@ export function socialImageMetadataForSite(siteUrl: string | undefined): Pick<
   return siteUrl ? {} : { openGraph: { images: [] }, twitter: { images: [] } };
 }
 
+export function canonicalMetadataForPath(
+  siteUrl: string | undefined,
+  path: string,
+): Pick<Metadata, "alternates"> {
+  if (!siteUrl) {
+    return {};
+  }
+
+  return {
+    alternates: {
+      canonical: new URL(path, siteUrl).toString(),
+    },
+  };
+}
+
 export function createSiteMetadata(siteUrl: string | undefined): Metadata {
   return {
     title: {

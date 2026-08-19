@@ -3,10 +3,13 @@ import Link from "next/link";
 import { ContactCta } from "@/components/contact-cta";
 import { ExperienceCard } from "@/components/experience-card";
 import { portfolio } from "@/content/portfolio";
+import { canonicalMetadataForPath } from "@/lib/site-metadata";
+import { resolveSiteUrl } from "@/lib/site-url";
 
 export const metadata: Metadata = {
   title: "Experience",
   description: portfolio.experience[0].summary,
+  ...canonicalMetadataForPath(resolveSiteUrl(), "/experience"),
 };
 
 export default function ExperiencePage() {
@@ -61,7 +64,11 @@ export default function ExperiencePage() {
         </div>
       </section>
 
-      <aside aria-labelledby="theatre-title" className="theatre-support">
+      <aside
+        aria-labelledby="theatre-title"
+        className="theatre-support"
+        id="technical-theatre"
+      >
         <div className="shell theatre-support__inner">
           <div>
             <p className="eyebrow">Supporting technical record</p>

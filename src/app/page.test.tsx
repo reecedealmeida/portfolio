@@ -38,4 +38,23 @@ describe("HomePage", () => {
       portfolio.home.evidencePrinciples = originalPrinciples;
     }
   });
+
+  it("links directly to the configured résumé PDF only when it is available", () => {
+    const originalResume = portfolio.resume;
+    portfolio.resume = {
+      state: "available",
+      href: "/resume/reece-dealmeida-resume.pdf",
+      request: originalResume.request,
+    };
+
+    try {
+      render(<HomePage />);
+      expect(screen.getByRole("link", { name: "Download résumé" })).toHaveAttribute(
+        "href",
+        "/resume/reece-dealmeida-resume.pdf",
+      );
+    } finally {
+      portfolio.resume = originalResume;
+    }
+  });
 });
