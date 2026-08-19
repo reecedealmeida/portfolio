@@ -1,10 +1,11 @@
 .superpowers/
 .codex-brief-render/
 node_modules/
+.pnpm-store/
+*.tsbuildinfo
 .next/
 out/
 .vercel/
 *.log
 .env*
 !.env.example
-
