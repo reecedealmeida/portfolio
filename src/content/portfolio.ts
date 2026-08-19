@@ -501,7 +501,7 @@ export const portfolio: PortfolioContent = {
       summary:
         "Contributed to product-data consolidation, systems migration support, and IT deployment work in a high-volume apparel operation.",
       details: [
-        "Helped organize and manage product information covering items, colors, and product/color variant sales.",
+        "Helped organize and manage product information covering more than 21,000 items, colors, and product/color variant sales.",
         "Contributed to a centralized digital product-management workflow without claiming migration leadership.",
         "Helped configure and deploy 20 desktop systems across three company divisions.",
       ],
