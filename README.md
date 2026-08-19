@@ -42,7 +42,9 @@ pnpm test:e2e
 
 ## Deploy to Vercel
 
-Import the Git repository into Vercel, accept the Next.js defaults, and deploy. Set the production URL in `src/content/portfolio.ts` before the final production deployment so the site metadata resolves to the canonical address.
+Import the Git repository into Vercel, accept the Next.js defaults, and deploy. After adding the custom domain in Vercel, set `NEXT_PUBLIC_SITE_URL` in the Vercel production environment to the canonical custom-domain URL, including the `https://` scheme and with no trailing slash (for example, `https://portfolio.example`). This is the authoritative production site URL for canonical and social metadata. Vercel's `VERCEL_PROJECT_PRODUCTION_URL` is an automatic fallback, but set the custom domain explicitly with `NEXT_PUBLIC_SITE_URL`.
+
+Redeploy after setting the environment variable. Before launch, verify the canonical and Open Graph metadata, `/robots.txt`, and `/sitemap.xml` on the production domain.
 
 ## Connect GoDaddy DNS
 
