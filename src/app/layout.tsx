@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { SkipLink } from "@/components/skip-link";
-import { portfolio } from "@/content/portfolio";
+import { createSiteMetadata } from "@/lib/site-metadata";
+import { resolveSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 const sans = DM_Sans({
@@ -16,13 +16,7 @@ const display = Cormorant_Garamond({
   variable: "--font-display",
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: `${portfolio.person.name} — ${portfolio.person.title}`,
-    template: `%s — ${portfolio.person.name}`,
-  },
-  description: portfolio.site.description,
-};
+export const metadata = createSiteMetadata(resolveSiteUrl());
 
 export default function RootLayout({
   children,

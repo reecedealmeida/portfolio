@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">RD orbital monogram</title>
+  <rect width="128" height="128" fill="#f4f0e8"/>
+  <circle cx="64" cy="64" r="40" fill="none" stroke="#d85f35" stroke-width="4" stroke-dasharray="184 68" transform="rotate(-32 64 64)"/>
+  <circle cx="98" cy="42" r="5" fill="#d85f35"/>
+  <text x="64" y="79" fill="#102a43" font-family="Georgia, serif" font-size="46" font-weight="700" text-anchor="middle">RD</text>
+</svg>

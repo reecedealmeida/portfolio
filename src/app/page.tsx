@@ -5,6 +5,10 @@ import { OrbitalHero } from "@/components/diagrams/orbital-hero";
 import { ProjectGrid } from "@/components/project-grid";
 import { Reveal } from "@/components/reveal";
 import { portfolio } from "@/content/portfolio";
+import { socialImageMetadataForSite } from "@/lib/site-metadata";
+import { resolveSiteUrl } from "@/lib/site-url";
+
+export const metadata = socialImageMetadataForSite(resolveSiteUrl());
 
 const evidencePrinciples = [
   {
