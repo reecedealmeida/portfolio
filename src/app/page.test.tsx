@@ -10,5 +10,8 @@ describe("HomePage", () => {
     );
     expect(screen.getByRole("link", { name: /Tsiolkovsky/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Oberth/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Explore selected work" }),
+    ).toHaveAttribute("href", "#selected-work");
   });
 });

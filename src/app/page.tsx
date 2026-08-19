@@ -39,7 +39,7 @@ export default function HomePage() {
             <h1 className="display-title">{portfolio.home.headline}</h1>
             <p className="lede">{portfolio.home.introduction}</p>
             <div className="home-hero__actions">
-              <Link className="button" href="/projects">
+              <Link className="button" href="#selected-work">
                 Explore selected work
               </Link>
               <Link className="button button--secondary" href="/contact">
