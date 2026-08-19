@@ -723,6 +723,144 @@ button {
   margin: clamp(1.75rem, 4vw, 3rem) 0 0;
 }
 
+.about-page__narrative {
+  max-width: 48rem;
+  margin-top: clamp(1.75rem, 4vw, 3rem);
+}
+
+.about-page__narrative p {
+  margin: 0;
+}
+
+.about-page__narrative p + p {
+  margin-top: 1.25rem;
+}
+
+.about-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: 0;
+  margin: clamp(2rem, 5vw, 4rem) 0 0;
+  border-block: 1px solid var(--line);
+  list-style: none;
+}
+
+.about-timeline li {
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  border-left: 1px solid var(--line);
+}
+
+.about-timeline li:last-child {
+  border-right: 1px solid var(--line);
+}
+
+.about-timeline .eyebrow {
+  margin: 0 0 clamp(1.5rem, 3vw, 3rem);
+}
+
+.about-timeline h3 {
+  margin: 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.35rem, 2.25vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.about-timeline li > p:last-child {
+  margin: 1rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.experience-list {
+  margin: clamp(2rem, 4vw, 3rem) 0 1.5rem;
+  border-top: 2px solid var(--ink);
+}
+
+.experience-card {
+  display: grid;
+  grid-template-columns: minmax(11rem, 0.4fr) minmax(0, 1fr);
+  gap: 0.75rem clamp(2rem, 5vw, 5rem);
+  padding: clamp(1.5rem, 3vw, 2.5rem) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.experience-card .eyebrow {
+  margin: 0;
+}
+
+.experience-card .section-title {
+  margin: 0;
+  font-size: clamp(1.8rem, 3.2vw, 3rem);
+}
+
+.experience-card .lede {
+  grid-column: 2;
+  margin: 0;
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+}
+
+.experience-card ul {
+  display: grid;
+  grid-column: 2;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem 2rem;
+  padding: 1.25rem 0 0;
+  margin: 0;
+  border-top: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.experience-card li::marker,
+.theatre-support__highlights li::marker {
+  color: var(--accent-dark);
+}
+
+.theatre-support {
+  padding-block: clamp(2.5rem, 5vw, 4rem);
+  border-top: 1px solid var(--line);
+  background: var(--paper-raised);
+}
+
+.theatre-support__inner {
+  display: grid;
+  grid-template-columns: minmax(12rem, 0.55fr) minmax(0, 1fr);
+  gap: clamp(2rem, 6vw, 6rem);
+}
+
+.theatre-support h2 {
+  max-width: 9ch;
+  margin: 0.75rem 0 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.8rem, 3.2vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.theatre-support__content > p:first-child {
+  max-width: 46rem;
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.theatre-support__highlights {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem 2rem;
+  padding: 0 0 1.25rem 1.25rem;
+  margin: 1.25rem 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+.theatre-support__content .eyebrow {
+  margin: 0 0 0.75rem;
+}
+
 .case-study__hero {
   border-bottom: 1px solid var(--line);
 }
@@ -1041,7 +1179,8 @@ button {
   .about-preview__layout,
   .contact-cta__inner,
   .case-study__hero-layout,
-  .case-study__body {
+  .case-study__body,
+  .theatre-support__inner {
     grid-template-columns: 1fr;
   }
 
@@ -1088,6 +1227,31 @@ button {
   .principles__list li + li {
     border-top: 1px solid var(--line);
   }
+
+  .about-timeline,
+  .experience-card ul,
+  .theatre-support__highlights {
+    grid-template-columns: 1fr;
+  }
+
+  .about-timeline li,
+  .about-timeline li:last-child {
+    border-right: 1px solid var(--line);
+  }
+
+  .about-timeline li + li {
+    border-top: 1px solid var(--line);
+  }
+
+  .experience-card {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .experience-card .lede,
+  .experience-card ul {
+    grid-column: 1;
+  }
 }
 
 @media (min-width: 42.01rem) and (max-width: 64rem) {
@@ -1114,6 +1278,23 @@ button {
   .principles__list li:nth-child(4) {
     border-top: 1px solid var(--line);
     border-right: 1px solid var(--line);
+  }
+
+  .about-timeline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .about-timeline li:nth-child(3),
+  .about-timeline li:nth-child(4) {
+    border-top: 1px solid var(--line);
+  }
+
+  .about-timeline li:nth-child(2) {
+    border-right: 1px solid var(--line);
+  }
+
+  .experience-card ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

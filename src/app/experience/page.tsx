@@ -42,25 +42,6 @@ export default function ExperiencePage() {
         </div>
       </section>
 
-      <section aria-labelledby="theatre-title" className="section section--line">
-        <div className="shell grid grid--two">
-          <div>
-            <p className="eyebrow">Technical theatre</p>
-            <h2 className="section-title" id="theatre-title">
-              Live operations under pressure.
-            </h2>
-          </div>
-          <div>
-            <p className="lede">{theatre.summary}</p>
-            <ul>
-              {theatre.highlights.map((highlight) => (
-                <li key={highlight}>{highlight}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
       <section aria-labelledby="outreach-title" className="section section--line">
         <div className="shell grid grid--two">
           <div>
@@ -80,21 +61,30 @@ export default function ExperiencePage() {
         </div>
       </section>
 
-      <section aria-labelledby="awards-title" className="section section--line">
-        <div className="shell">
-          <p className="eyebrow">Selective recognition</p>
-          <h2 className="section-title" id="awards-title">
-            Awards in technical theatre.
-          </h2>
-          <ul className="tag-list" aria-label="Awards">
-            {awards.map((award) => (
-              <li className="tag" key={award}>
-                {award}
-              </li>
-            ))}
-          </ul>
+      <aside aria-labelledby="theatre-title" className="theatre-support">
+        <div className="shell theatre-support__inner">
+          <div>
+            <p className="eyebrow">Supporting technical record</p>
+            <h2 id="theatre-title">Live operations under pressure.</h2>
+          </div>
+          <div className="theatre-support__content">
+            <p>{theatre.summary}</p>
+            <ul className="theatre-support__highlights">
+              {theatre.highlights.map((highlight) => (
+                <li key={highlight}>{highlight}</li>
+              ))}
+            </ul>
+            <p className="eyebrow">Selected recognition</p>
+            <ul className="tag-list" aria-label="Technical theatre recognition">
+              {awards.map((award) => (
+                <li className="tag" key={award}>
+                  {award}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </section>
+      </aside>
       <ContactCta />
     </>
   );
