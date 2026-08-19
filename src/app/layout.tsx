@@ -1,9 +1,27 @@
 import type { Metadata } from "next";
+import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
+import { SkipLink } from "@/components/skip-link";
+import { portfolio } from "@/content/portfolio";
 import "./globals.css";
 
+const sans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
+
+const display = Cormorant_Garamond({
+  subsets: ["latin"],
+  variable: "--font-display",
+});
+
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "Engineering portfolio foundation.",
+  title: {
+    default: `${portfolio.person.name} — ${portfolio.person.title}`,
+    template: `%s — ${portfolio.person.name}`,
+  },
+  description: portfolio.site.description,
 };
 
 export default function RootLayout({
@@ -11,7 +29,12 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={`${sans.variable} ${display.variable}`}>
+        <SkipLink />
+        <SiteHeader />
+        <main id="main-content">{children}</main>
+        <SiteFooter />
+      </body>
     </html>
   );
 }
