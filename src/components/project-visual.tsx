@@ -1,3 +1,4 @@
+import { useId } from "react";
 import type { ProjectVisual as ProjectVisualData } from "@/content/portfolio";
 
 type ProjectVisualProps = {
@@ -57,7 +58,9 @@ export function ProjectVisual({
   decorative = false,
   className = "",
 }: ProjectVisualProps) {
-  const titleId = `project-visual-${visual.variant}-title`;
+  const instanceId = useId().replace(/:/g, "");
+  const titleId = `project-visual-${visual.variant}-${instanceId}-title`;
+  const gridId = `grid-${visual.variant}-${instanceId}`;
 
   return (
     <figure className={`project-visual ${className}`.trim()}>
@@ -71,12 +74,12 @@ export function ProjectVisual({
       >
         {decorative ? null : <title id={titleId}>{visual.alt}</title>}
         <defs>
-          <pattern id={`grid-${visual.variant}`} height="50" width="50" patternUnits="userSpaceOnUse">
+          <pattern id={gridId} height="50" width="50" patternUnits="userSpaceOnUse">
             <path className="project-visual__grid" d="M50 0H0V50" />
           </pattern>
         </defs>
         <rect className="project-visual__field" height="600" width="1000" />
-        <rect fill={`url(#grid-${visual.variant})`} height="600" width="1000" />
+        <rect fill={`url(#${gridId})`} height="600" width="1000" />
         <VariantMarks variant={visual.variant} />
       </svg>
     </figure>
