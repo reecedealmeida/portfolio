@@ -300,3 +300,54 @@ test("configured footer social-link styling provides a practical target", async 
 
   expect(height).toBeGreaterThanOrEqual(44);
 });
+
+test("configured contact CTA links stay legible, wrapped, and focus-visible", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const cta = page.locator(".contact-cta");
+  const styles = await cta.evaluate((element) => {
+    const action = element.querySelector(".contact-cta__action")!;
+    const navigation = document.createElement("nav");
+    navigation.className = "contact-cta__links";
+    navigation.setAttribute("aria-label", "Professional links");
+    const link = document.createElement("a");
+    link.className = "text-link";
+    link.href = "https://example.test/profile";
+    link.textContent = "Profile";
+    navigation.append(link);
+    action.append(navigation);
+
+    const navigationStyles = getComputedStyle(navigation);
+    const linkStyles = getComputedStyle(link);
+    return {
+      color: linkStyles.color,
+      columnGap: Number.parseFloat(navigationStyles.columnGap),
+      display: navigationStyles.display,
+      flexWrap: navigationStyles.flexWrap,
+      marginTop: Number.parseFloat(navigationStyles.marginTop),
+      rowGap: Number.parseFloat(navigationStyles.rowGap),
+    };
+  });
+
+  expect(styles.color).toBe("rgb(239, 154, 114)");
+  expect(styles.display).toBe("flex");
+  expect(styles.flexWrap).toBe("wrap");
+  expect(styles.columnGap).toBeGreaterThan(0);
+  expect(styles.rowGap).toBeGreaterThan(0);
+  expect(styles.marginTop).toBeGreaterThan(0);
+
+  const link = cta.getByRole("link", { name: "Profile" });
+  await link.hover();
+  await expect(link).toHaveCSS("color", "rgb(251, 249, 244)");
+  await page.mouse.move(0, 0);
+  await cta.getByRole("link", { name: "Start a conversation" }).focus();
+  await page.keyboard.press("Tab");
+  await expect(link).toBeFocused();
+  await expect(link).toHaveCSS("outline-color", "rgb(239, 154, 114)");
+  await expect(link).toHaveCSS("outline-style", "solid");
+  const outlineWidth = await link.evaluate((element) =>
+    Number.parseFloat(getComputedStyle(element).outlineWidth),
+  );
+  expect(outlineWidth).toBeGreaterThan(0);
+});

@@ -594,6 +594,26 @@ aside[id] {
   color: #c6d0da;
 }
 
+.contact-cta__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.contact-cta__links .text-link {
+  color: #ef9a72;
+}
+
+.contact-cta__links .text-link:hover,
+.contact-cta__links .text-link:focus-visible {
+  color: var(--paper-raised);
+}
+
+.contact-cta__links .text-link:focus-visible {
+  outline-color: #ef9a72;
+}
+
 .contact-cta .button {
   border-color: var(--paper-raised);
   background: var(--paper-raised);
