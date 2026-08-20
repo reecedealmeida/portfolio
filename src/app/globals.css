@@ -1115,6 +1115,10 @@ aside[id] {
 }
 
 @media (max-width: 42rem) {
+  :root {
+    --header-height: 12.25rem;
+  }
+
   .site-header__inner,
   .site-footer__inner {
     align-items: flex-start;
@@ -1145,11 +1149,6 @@ aside[id] {
 
   .case-study__index {
     position: static;
-  }
-
-  section[id],
-  aside[id] {
-    scroll-margin-top: 2rem;
   }
 
   .evidence-grid {

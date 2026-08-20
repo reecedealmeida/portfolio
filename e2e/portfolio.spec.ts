@@ -225,6 +225,48 @@ test("desktop header and case-study index stay useful around fragment navigation
   await expect(page.locator("#technical-theatre")).toBeVisible();
 });
 
+test("mobile fragment targets clear the sticky header", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  await page.addStyleTag({ content: "html { scroll-behavior: auto !important; }" });
+  await expect(page.locator(".site-header")).toHaveCSS("position", "sticky");
+  await page.getByRole("link", { name: "Explore selected work" }).click();
+  await expect(page).toHaveURL(/#selected-work$/);
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+
+  const selectedWorkOffsets = await page.locator("#selected-work").evaluate((target) => {
+    const header = document.querySelector(".site-header")!;
+    return {
+      headerBottom: header.getBoundingClientRect().bottom,
+      scrollY: window.scrollY,
+      targetTop: target.getBoundingClientRect().top,
+    };
+  });
+  expect(selectedWorkOffsets.scrollY).toBeGreaterThan(0);
+  expect(selectedWorkOffsets.targetTop).toBeGreaterThanOrEqual(
+    selectedWorkOffsets.headerBottom,
+  );
+  expect(selectedWorkOffsets.targetTop).toBeLessThan(selectedWorkOffsets.headerBottom + 64);
+
+  await page.goto("/projects/systemsgo-tsiolkovsky");
+  await page.addStyleTag({ content: "html { scroll-behavior: auto !important; }" });
+  await page.getByRole("link", { name: "Testing & verification" }).click();
+  await expect(page).toHaveURL(/#testing$/);
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+
+  const caseStudyOffsets = await page.locator("#testing").evaluate((target) => {
+    const header = document.querySelector(".site-header")!;
+    return {
+      headerBottom: header.getBoundingClientRect().bottom,
+      scrollY: window.scrollY,
+      targetTop: target.getBoundingClientRect().top,
+    };
+  });
+  expect(caseStudyOffsets.scrollY).toBeGreaterThan(0);
+  expect(caseStudyOffsets.targetTop).toBeGreaterThanOrEqual(caseStudyOffsets.headerBottom);
+  expect(caseStudyOffsets.targetTop).toBeLessThan(caseStudyOffsets.headerBottom + 64);
+});
+
 test("diagram regions are focusable only when horizontal scrolling is available", async ({
   page,
 }) => {
