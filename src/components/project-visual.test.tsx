@@ -21,6 +21,7 @@ describe("ProjectVisual", () => {
   it("hides a repeated visual from assistive technology", () => {
     render(<ProjectVisual decorative visual={visual} />);
     expect(screen.queryByRole("img")).not.toBeInTheDocument();
+    expect(document.querySelector("figure")).toHaveAttribute("aria-hidden", "true");
     expect(document.querySelector("svg")).toHaveAttribute("aria-hidden", "true");
   });
 

@@ -63,7 +63,10 @@ export function ProjectVisual({
   const gridId = `grid-${visual.variant}-${instanceId}`;
 
   return (
-    <figure className={`project-visual ${className}`.trim()}>
+    <figure
+      aria-hidden={decorative ? "true" : undefined}
+      className={`project-visual ${className}`.trim()}
+    >
       <svg
         aria-hidden={decorative ? "true" : undefined}
         aria-labelledby={decorative ? undefined : titleId}
