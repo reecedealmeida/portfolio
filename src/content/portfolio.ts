@@ -101,8 +101,8 @@ export const portfolio: PortfolioContent = {
     { label: "GitHub", href: "https://github.com/reecedealmeida" },
   ],
   resume: {
-    state: "needed",
-    href: "",
+    state: "available",
+    href: "/resume/reece-dealmeida-resume.pdf",
     request: "Add a current one-page engineering résumé PDF before publishing.",
   },
   home: {
