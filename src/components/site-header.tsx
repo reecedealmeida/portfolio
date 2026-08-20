@@ -1,16 +1,20 @@
 import Link from "next/link";
 import { portfolio } from "@/content/portfolio";
+import { getSocialLink } from "@/lib/portfolio";
 
 const primaryRoutes = [
   { href: "/projects", label: "Work" },
   { href: "/about", label: "About" },
   { href: "/experience", label: "Experience" },
-  { href: "/contact#resume", label: "Résumé" },
-  { href: "/contact", label: "Contact" },
 ] as const;
 
 export function SiteHeader() {
   const identity = portfolio.person;
+  const linkedIn = getSocialLink("LinkedIn");
+  const resumeHref =
+    portfolio.resume.state === "available" && portfolio.resume.href.trim()
+      ? portfolio.resume.href
+      : "/contact#resume";
 
   return (
     <header className="site-header">
@@ -25,6 +29,13 @@ export function SiteHeader() {
               {route.label}
             </Link>
           ))}
+          <Link href={resumeHref}>Résumé</Link>
+          <Link href="/contact">Contact</Link>
+          {linkedIn ? (
+            <a href={linkedIn.href} rel="noreferrer">
+              LinkedIn
+            </a>
+          ) : null}
         </nav>
       </div>
     </header>

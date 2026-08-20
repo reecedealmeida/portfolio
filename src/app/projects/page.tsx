@@ -20,8 +20,9 @@ export default function ProjectsPage() {
           <p className="eyebrow">Projects / 01—04</p>
           <h1 className="display-title">Engineering work, with the evidence visible.</h1>
           <p className="lede">
-            Four case studies organized around context, constraints, contribution,
-            implementation, testing, and the records still needed to support each claim.
+            Selected engineering work across rocketry, avionics, data systems, and
+            infrastructure. Each project opens into the constraints, contribution,
+            implementation, testing, and evidence behind it.
           </p>
         </div>
       </section>

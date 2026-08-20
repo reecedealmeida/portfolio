@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
+import { portfolio } from "@/content/portfolio";
 import { SiteHeader } from "./site-header";
 
 describe("SiteHeader", () => {
@@ -26,5 +27,22 @@ describe("SiteHeader", () => {
       "href",
       "/contact",
     );
+  });
+
+  it("shows LinkedIn as a direct utility link only when configured", () => {
+    const originalSocial = portfolio.social;
+    portfolio.social = [
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/configure-me" },
+    ];
+
+    try {
+      render(<SiteHeader />);
+      expect(screen.getByRole("link", { name: "LinkedIn" })).toHaveAttribute(
+        "href",
+        "https://www.linkedin.com/in/configure-me",
+      );
+    } finally {
+      portfolio.social = originalSocial;
+    }
   });
 });

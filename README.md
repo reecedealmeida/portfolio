@@ -24,6 +24,21 @@ Copy verified evidence files into `public/evidence`. For the matching evidence i
 
 Copy the PDF to `public/resume/reece-dealmeida-resume.pdf`. In `src/content/portfolio.ts`, set the résumé `state` to `"available"` and set its `href` to `/resume/reece-dealmeida-resume.pdf`.
 
+Configure professional destinations in the same content block before publishing. Empty social values are omitted automatically.
+
+```ts
+social: [
+  { label: "Email", href: "mailto:you@example.com" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/your-profile" },
+  { label: "GitHub", href: "https://github.com/your-profile" },
+],
+resume: {
+  state: "available",
+  href: "/resume/reece-dealmeida-resume.pdf",
+  request: "Add a current one-page engineering resume PDF before publishing.",
+},
+```
+
 ## Add a project
 
 Duplicate one typed project record in `src/content/portfolio.ts`, choose a unique slug and number, and provide every case-study section. Add a verified evidence state for each supporting item before publishing the project.

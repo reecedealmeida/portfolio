@@ -1,7 +1,9 @@
-import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { cleanup, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it } from "vitest";
 import { portfolio } from "@/content/portfolio";
 import HomePage from "./page";
+
+afterEach(cleanup);
 
 describe("HomePage", () => {
   it("leads with the approved headline and strongest work", () => {
@@ -16,27 +18,12 @@ describe("HomePage", () => {
     ).toHaveAttribute("href", "#selected-work");
   });
 
-  it("renders evidence principles from the canonical portfolio content", () => {
-    const originalPrinciples = portfolio.home.evidencePrinciples;
-    portfolio.home.evidencePrinciples = [
-      {
-        number: "01",
-        title: "Configured principle",
-        detail: "This copy came from the canonical content source.",
-      },
-    ];
-
-    try {
-      render(<HomePage />);
-      expect(
-        screen.getByText("Configured principle", { selector: "strong" }),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText("This copy came from the canonical content source."),
-      ).toBeInTheDocument();
-    } finally {
-      portfolio.home.evidencePrinciples = originalPrinciples;
-    }
+  it("prioritizes visual selected work over abstract principles", () => {
+    render(<HomePage />);
+    expect(document.querySelectorAll(".project-visual").length).toBeGreaterThanOrEqual(2);
+    expect(screen.queryByText("Working principles")).not.toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Technical theatre systems and leadership/i }))
+      .toHaveAttribute("href", "/experience#technical-theatre");
   });
 
   it("links directly to the configured résumé PDF only when it is available", () => {
@@ -49,7 +36,7 @@ describe("HomePage", () => {
 
     try {
       render(<HomePage />);
-      expect(screen.getByRole("link", { name: "Download résumé" })).toHaveAttribute(
+      expect(screen.getByRole("link", { name: "Résumé" })).toHaveAttribute(
         "href",
         "/resume/reece-dealmeida-resume.pdf",
       );
