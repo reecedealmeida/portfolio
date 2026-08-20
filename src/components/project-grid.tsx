@@ -14,7 +14,7 @@ export function ProjectGrid({ projects, featuredOnly = false }: ProjectGridProps
   return (
     <div className="project-grid">
       {visibleProjects.map((project, index) => (
-        <ProjectCard key={project.slug} priority={index < 2} project={project} />
+        <ProjectCard index={index} key={project.slug} project={project} />
       ))}
     </div>
   );
