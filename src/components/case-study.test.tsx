@@ -12,6 +12,11 @@ describe("CaseStudy", () => {
     expect(screen.getByRole("img", { name: project.visual.alt })).toBeInTheDocument();
     expect(screen.getByRole("navigation", { name: "Case study sections" }))
       .toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 2, name: "Flight-computer data flow" }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 2, name: "Evidence" }))
+      .toBeInTheDocument();
     expect(screen.getByRole("link", { name: new RegExp(nextProject.shortTitle, "i") }))
       .toHaveAttribute("href", `/projects/${nextProject.slug}`);
     expect(document.querySelectorAll(`[data-visual-variant='${nextProject.visual.variant}']`))

@@ -12,8 +12,8 @@ export default function OpenGraphImage() {
       <div
         style={{
           alignItems: "center",
-          background: "#f4f0e8",
-          color: "#102a43",
+          background: "#f7f7f4",
+          color: "#171a1d",
           display: "flex",
           height: "100%",
           justifyContent: "space-between",
@@ -25,7 +25,7 @@ export default function OpenGraphImage() {
         <div style={{ display: "flex", flexDirection: "column", maxWidth: "720px" }}>
           <div
             style={{
-              color: "#a94020",
+              color: "#315f78",
               display: "flex",
               fontFamily: "Arial, sans-serif",
               fontSize: "22px",
@@ -34,12 +34,12 @@ export default function OpenGraphImage() {
               textTransform: "uppercase",
             }}
           >
-            {portfolio.person.name}
+            {portfolio.person.title} · {portfolio.person.school}
           </div>
           <div
             style={{
               display: "flex",
-              fontFamily: "Georgia, serif",
+              fontFamily: "Arial, sans-serif",
               fontSize: "68px",
               fontWeight: 600,
               letterSpacing: "-3px",
@@ -53,7 +53,7 @@ export default function OpenGraphImage() {
         <div
           style={{
             alignItems: "center",
-            border: "4px solid #d85f35",
+            border: "4px solid #315f78",
             borderRadius: "50%",
             display: "flex",
             height: "290px",
@@ -65,7 +65,7 @@ export default function OpenGraphImage() {
         >
           <div
             style={{
-              background: "#102a43",
+              background: "#171a1d",
               borderRadius: "50%",
               display: "flex",
               height: "96px",
@@ -74,7 +74,7 @@ export default function OpenGraphImage() {
           />
           <div
             style={{
-              background: "#d85f35",
+              background: "#6e8795",
               borderRadius: "50%",
               display: "flex",
               height: "22px",

@@ -8,7 +8,7 @@ import { resolveSiteUrl } from "@/lib/site-url";
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Engineering case studies covering rocketry, avionics, systems migration, and software infrastructure.",
+    "Reece DeAlmeida's work in high-powered rocketry, avionics, product-data systems, and software infrastructure.",
   ...canonicalMetadataForPath(resolveSiteUrl(), "/projects"),
 };
 
@@ -18,11 +18,10 @@ export default function ProjectsPage() {
       <section className="projects-index section">
         <div className="shell">
           <p className="eyebrow">Projects / 01—04</p>
-          <h1 className="display-title">Engineering work, with the evidence visible.</h1>
+          <h1 className="display-title">Projects</h1>
           <p className="lede">
-            Selected engineering work across rocketry, avionics, data systems, and
-            infrastructure. Each project opens into the constraints, contribution,
-            implementation, testing, and evidence behind it.
+            High-powered rocketry, avionics, product-data systems, and software
+            infrastructure.
           </p>
         </div>
       </section>

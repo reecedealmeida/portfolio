@@ -20,20 +20,14 @@ export default function ExperiencePage() {
       <section className="section">
         <div className="shell">
           <p className="eyebrow">Experience / contribution</p>
-          <h1 className="display-title">Work grounded in useful systems support.</h1>
-          <p className="lede">
-            A focused record of professional operations, live technical work, and
-            mentorship—each described at the level supported by the available evidence.
-          </p>
+          <h1 className="display-title">Experience</h1>
         </div>
       </section>
 
       <section aria-labelledby="professional-title" className="section section--line">
         <div className="shell">
           <p className="eyebrow">Professional experience</p>
-          <h2 className="section-title" id="professional-title">
-            Product data and systems support at operational scale.
-          </h2>
+          <h2 className="section-title" id="professional-title">Alphalete Athletics</h2>
           <div className="experience-list">
             {experience.map((entry) => (
               <ExperienceCard entry={entry} key={`${entry.organization}-${entry.title}`} />
@@ -49,9 +43,7 @@ export default function ExperiencePage() {
         <div className="shell grid grid--two">
           <div>
             <p className="eyebrow">Outreach and mentoring</p>
-            <h2 className="section-title" id="outreach-title">
-              Occasional support for the next round of builders.
-            </h2>
+            <h2 className="section-title" id="outreach-title">SystemsGo mentoring</h2>
           </div>
           <div>
             <p className="lede">{outreach.summary}</p>
@@ -72,7 +64,7 @@ export default function ExperiencePage() {
         <div className="shell theatre-support__inner">
           <div>
             <p className="eyebrow">Supporting technical record</p>
-            <h2 id="theatre-title">Live operations under pressure.</h2>
+            <h2 id="theatre-title">Technical theatre</h2>
           </div>
           <div className="theatre-support__content">
             <p>{theatre.summary}</p>

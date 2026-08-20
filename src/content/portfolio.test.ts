@@ -2,10 +2,8 @@ import { describe, expect, it } from "vitest";
 import { portfolio } from "./portfolio";
 
 describe("portfolio content", () => {
-  it("uses the approved evidence-first headline", () => {
-    expect(portfolio.home.headline).toBe(
-      "Engineering through building, testing, and iteration.",
-    );
+  it("uses the approved name-led headline", () => {
+    expect(portfolio.home.headline).toBe("Reece DeAlmeida.");
   });
 
   it("uses unique project slugs and marks missing evidence explicitly", () => {

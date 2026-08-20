@@ -6,6 +6,8 @@ import { ContactCta } from "./contact-cta";
 describe("ContactCta", () => {
   it("keeps the contact page available when professional links are unconfigured", () => {
     render(<ContactCta />);
+    expect(screen.getByRole("heading", { level: 2, name: "Get in touch" }))
+      .toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Start a conversation" })).toHaveAttribute(
       "href",
       "/contact",

@@ -22,13 +22,71 @@ test("every indexable route emits its own canonical URL", async ({ page }) => {
 
 test("recruiter can reach the two primary case studies", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Engineering through building");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Reece DeAlmeida.");
   await page.getByRole("link", { name: /Tsiolkovsky/i }).first().click();
   await expect(page).toHaveURL(/systemsgo-tsiolkovsky/);
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Tsiolkovsky");
   await page.getByRole("link", { name: "Work" }).click();
   await page.getByRole("link", { name: /Oberth/i }).first().click();
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Oberth");
+});
+
+test("the name-led hero stays bold on desktop and wraps cleanly on mobile", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto("/");
+  const headline = page.getByRole("heading", { level: 1 });
+  const desktopMetrics = await headline.evaluate((element) => {
+    const style = getComputedStyle(element);
+    return {
+      height: element.getBoundingClientRect().height,
+      lineHeight: Number.parseFloat(style.lineHeight),
+    };
+  });
+  expect(desktopMetrics.height).toBeLessThanOrEqual(desktopMetrics.lineHeight * 1.1);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  const mobileMetrics = await headline.evaluate((element) => {
+    const style = getComputedStyle(element);
+    return {
+      height: element.getBoundingClientRect().height,
+      lineHeight: Number.parseFloat(style.lineHeight),
+    };
+  });
+  expect(mobileMetrics.height).toBeGreaterThan(mobileMetrics.lineHeight * 1.5);
+});
+
+test("the global theme is neutral, high-contrast, and aerospace-blue accented", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  const theme = await page.evaluate(() => {
+    const root = getComputedStyle(document.documentElement);
+    const body = getComputedStyle(document.body);
+    const parseRgb = (value: string) =>
+      value.match(/\d+/g)?.slice(0, 3).map(Number) ?? [];
+    const accentProbe = document.createElement("span");
+    accentProbe.style.color = root.getPropertyValue("--accent");
+    document.body.append(accentProbe);
+    const accent = parseRgb(getComputedStyle(accentProbe).color);
+    accentProbe.remove();
+
+    return {
+      accent,
+      background: parseRgb(body.backgroundColor),
+      bodyFont: body.fontFamily,
+      displayFont: getComputedStyle(document.querySelector(".display-title")!).fontFamily,
+      foreground: parseRgb(body.color),
+    };
+  });
+
+  expect(Math.max(...theme.background) - Math.min(...theme.background)).toBeLessThanOrEqual(4);
+  expect(Math.max(...theme.foreground) - Math.min(...theme.foreground)).toBeLessThanOrEqual(8);
+  expect(theme.accent[2]).toBeGreaterThan(theme.accent[0]);
+  expect(theme.bodyFont).toContain("Inter");
+  expect(theme.displayFont).toContain("Manrope");
 });
 
 test("project work is visual, alternating on desktop, and stacked without overflow on mobile", async ({
@@ -101,20 +159,31 @@ test("reduced motion removes project thumbnail scale and transition", async ({ p
 
 test("missing assets are explicit and never broken", async ({ page }) => {
   await page.goto("/contact");
-  await expect(page.getByText(/Contact details are ready to add/i)).toBeVisible();
+  const professionalLinks = page.locator(".contact-page__links a");
+  const professionalLinkCount = await professionalLinks.count();
+
+  if (professionalLinkCount === 0) {
+    await expect(page.getByText(/Contact details are ready to add/i)).toBeVisible();
+  } else {
+    const destinations = await professionalLinks.evaluateAll((links) =>
+      links.map((link) => link.getAttribute("href")),
+    );
+    expect(destinations.every((href) => /^(?:https:|mailto:)/.test(href ?? ""))).toBe(true);
+  }
+
   await page.goto("/projects/systemsgo-tsiolkovsky");
   await expect(page.getByText("Evidence to add").first()).toBeVisible();
   await expect(page.locator("img[src='']")).toHaveCount(0);
 });
 
-test("dark contact CTA has a distinct keyboard focus state", async ({ page }) => {
+test("light contact CTA has a distinct aerospace-blue keyboard focus state", async ({ page }) => {
   await page.goto("/");
   const contactCta = page.getByRole("link", { name: "Start a conversation" });
 
   await contactCta.focus();
 
-  await expect(contactCta).toHaveCSS("background-color", "rgb(239, 154, 114)");
-  await expect(contactCta).toHaveCSS("border-color", "rgb(239, 154, 114)");
+  await expect(contactCta).toHaveCSS("background-color", "rgb(49, 95, 120)");
+  await expect(contactCta).toHaveCSS("border-color", "rgb(49, 95, 120)");
 });
 
 test("practical mobile navigation targets are at least 44 CSS pixels tall", async ({
@@ -330,7 +399,7 @@ test("configured contact CTA links stay legible, wrapped, and focus-visible", as
     };
   });
 
-  expect(styles.color).toBe("rgb(239, 154, 114)");
+  expect(styles.color).toBe("rgb(49, 95, 120)");
   expect(styles.display).toBe("flex");
   expect(styles.flexWrap).toBe("wrap");
   expect(styles.columnGap).toBeGreaterThan(0);
@@ -339,12 +408,11 @@ test("configured contact CTA links stay legible, wrapped, and focus-visible", as
 
   const link = cta.getByRole("link", { name: "Profile" });
   await link.hover();
-  await expect(link).toHaveCSS("color", "rgb(251, 249, 244)");
+  await expect(link).toHaveCSS("color", "rgb(23, 26, 29)");
   await page.mouse.move(0, 0);
-  await cta.getByRole("link", { name: "Start a conversation" }).focus();
-  await page.keyboard.press("Tab");
+  await link.focus();
   await expect(link).toBeFocused();
-  await expect(link).toHaveCSS("outline-color", "rgb(239, 154, 114)");
+  await expect(link).toHaveCSS("outline-color", "rgb(49, 95, 120)");
   await expect(link).toHaveCSS("outline-style", "solid");
   const outlineWidth = await link.evaluate((element) =>
     Number.parseFloat(getComputedStyle(element).outlineWidth),

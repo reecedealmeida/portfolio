@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { createRobots } from "./robots";
+import manifest from "./manifest";
 import sitemap from "./sitemap";
 import { getProjectSlugs } from "@/lib/portfolio";
 import {
@@ -23,6 +24,15 @@ describe("sitemap", () => {
         ...getProjectSlugs().map((slug) => `http://localhost:3000/projects/${slug}`),
       ]),
     );
+  });
+});
+
+describe("manifest", () => {
+  it("uses the clean neutral canvas as the browser theme surface", () => {
+    expect(manifest()).toMatchObject({
+      background_color: "#f7f7f4",
+      theme_color: "#f7f7f4",
+    });
   });
 });
 

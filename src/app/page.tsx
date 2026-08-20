@@ -48,9 +48,7 @@ export default function HomePage() {
             <div className="section-heading">
               <div>
                 <p className="eyebrow">Selected work / 01—03</p>
-                <h2 className="section-title">
-                  Projects built through constraints and testing.
-                </h2>
+                <h2 className="section-title">Projects</h2>
               </div>
               <Link className="text-link" href="/projects">
                 View all projects ↗

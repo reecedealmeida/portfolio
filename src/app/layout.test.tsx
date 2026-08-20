@@ -3,8 +3,10 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 
 vi.mock("next/font/google", () => ({
-  Cormorant_Garamond: () => ({ variable: "--font-display" }),
-  DM_Sans: () => ({ variable: "--font-sans" }),
+  Cormorant_Garamond: () => ({ variable: "--font-old-display" }),
+  DM_Sans: () => ({ variable: "--font-old-sans" }),
+  Inter: () => ({ variable: "--font-sans" }),
+  Manrope: () => ({ variable: "--font-display" }),
 }));
 
 import RootLayout from "./layout";
@@ -12,13 +14,14 @@ import HomePage from "./page";
 
 function renderShell() {
   const container = document.createElement("div");
-  container.innerHTML = renderToStaticMarkup(
+  const markup = renderToStaticMarkup(
     <RootLayout>
       <HomePage />
     </RootLayout>,
   );
+  container.innerHTML = markup;
 
-  return { container, screen: within(container) };
+  return { container, markup, screen: within(container) };
 }
 
 describe("RootLayout", () => {
@@ -38,5 +41,12 @@ describe("RootLayout", () => {
       "tabindex",
       "-1",
     );
+  });
+
+  it("applies the clean sans-serif display and body font variables", () => {
+    const { markup } = renderShell();
+
+    expect(markup).toContain('class="--font-sans --font-display"');
+    expect(markup).not.toContain("--font-old-");
   });
 });

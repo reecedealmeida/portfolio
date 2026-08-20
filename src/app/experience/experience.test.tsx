@@ -24,17 +24,16 @@ describe("ExperiencePage", () => {
       page.queryByRole("heading", { name: /Awards in technical theatre/i }),
     ).not.toBeInTheDocument();
     expect(
-      page.getByRole("heading", {
-        name: /Product data and systems support at operational scale/i,
-      }),
+      page.getByRole("heading", { level: 1, name: "Experience" }),
     ).toBeInTheDocument();
     expect(
-      page.getByRole("heading", {
-        name: /Occasional support for the next round of builders/i,
-      }),
+      page.getByRole("heading", { level: 2, name: "Alphalete Athletics" }),
+    ).toBeInTheDocument();
+    expect(
+      page.getByRole("heading", { level: 2, name: "SystemsGo mentoring" }),
     ).toBeInTheDocument();
     expect(container.querySelector("#technical-theatre")).toContainElement(
-      page.getByRole("heading", { name: /Live operations under pressure/i }),
+      page.getByRole("heading", { level: 2, name: "Technical theatre" }),
     );
   });
 });

@@ -6,6 +6,12 @@ describe("AboutPage", () => {
   it("presents the approved academic narrative without unsupported affiliations", () => {
     render(<AboutPage />);
 
+    expect(screen.getByRole("heading", { level: 1, name: "About" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 2, name: "Current interests" }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 2, name: "Background" }))
+      .toBeInTheDocument();
     expect(screen.getByText(/Shackouls Honors College/i)).toBeInTheDocument();
     expect(screen.queryByText(/NASA employee/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/MSU research assistant/i)).not.toBeInTheDocument();

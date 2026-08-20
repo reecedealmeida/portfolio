@@ -18,7 +18,7 @@ export default function AboutPage() {
       <section className="section">
         <div className="shell">
           <p className="eyebrow">About / technical foundation</p>
-          <h1 className="display-title">Built through systems, tests, and iteration.</h1>
+          <h1 className="display-title">About</h1>
           <div className="about-page__narrative lede">
             {about.paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
@@ -31,9 +31,7 @@ export default function AboutPage() {
         <div className="shell grid grid--two">
           <div>
             <p className="eyebrow">Focus areas</p>
-            <h2 className="section-title" id="focus-title">
-              The systems I want to understand more deeply.
-            </h2>
+            <h2 className="section-title" id="focus-title">Current interests</h2>
           </div>
           <ul className="tag-list" aria-label="Engineering focus areas">
             {about.focusAreas.map((focusArea) => (
@@ -48,9 +46,7 @@ export default function AboutPage() {
       <section aria-labelledby="timeline-title" className="section section--line">
         <div className="shell">
           <p className="eyebrow">Chronology</p>
-          <h2 className="section-title" id="timeline-title">
-            A path shaped by hands-on technical work.
-          </h2>
+          <h2 className="section-title" id="timeline-title">Background</h2>
           <ol className="about-timeline">
             {about.timeline.map((entry) => (
               <li key={entry.year}>

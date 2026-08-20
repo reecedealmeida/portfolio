@@ -7,7 +7,7 @@ export function AboutPreview() {
       <div className="shell about-preview__layout">
         <div>
           <p className="eyebrow">Technical foundation / current study</p>
-          <h2 className="section-title">Systems thinking, carried into aerospace.</h2>
+          <h2 className="section-title">About</h2>
         </div>
         <div className="about-preview__copy">
           {portfolio.about.paragraphs.map((paragraph) => (

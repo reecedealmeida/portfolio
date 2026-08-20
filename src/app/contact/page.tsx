@@ -19,7 +19,7 @@ export default function ContactPage() {
       <div className="shell contact-page__layout">
         <div>
           <p className="eyebrow">Contact / professional details</p>
-          <h1 className="display-title">Let&apos;s compare notes on the work.</h1>
+          <h1 className="display-title">Contact</h1>
           {socialLinks.length === 0 ? (
             <p className="lede">
               Contact details are ready to add. Update the email and LinkedIn values in

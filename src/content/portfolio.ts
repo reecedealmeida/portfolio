@@ -64,7 +64,6 @@ export type PortfolioContent = {
     eyebrow: string;
     headline: string;
     introduction: string;
-    evidencePrinciples: { number: string; title: string; detail: string }[];
   };
   about: {
     paragraphs: string[];
@@ -93,13 +92,13 @@ export const portfolio: PortfolioContent = {
   site: {
     url: "",
     description:
-      "Evidence-first aerospace engineering portfolio focused on rocketry, avionics, embedded systems, and technical operations.",
+      "Portfolio of Reece DeAlmeida, an Aerospace Engineering student at Mississippi State University.",
   },
   // Configuration block: add professional destinations before publishing.
   social: [
-    { label: "Email", href: "" },
-    { label: "LinkedIn", href: "" },
-    { label: "GitHub", href: "" },
+    { label: "Email", href: "mailto:reece.dealmeida@yahoo.com" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/reece-dealmeida-5b3359325" },
+    { label: "GitHub", href: "https://github.com/reecedealmeida" },
   ],
   resume: {
     state: "needed",
@@ -108,36 +107,14 @@ export const portfolio: PortfolioContent = {
   },
   home: {
     eyebrow: "Aerospace Engineering · Mississippi State University",
-    headline: "Engineering through building, testing, and iteration.",
+    headline: "Reece DeAlmeida.",
     introduction:
-      "An early-career aerospace engineering student with a technical foundation in high-powered rocketry, avionics, embedded systems, software infrastructure, and live technical operations. This portfolio prioritizes specific work, constraints, testing, and evidence over unsupported claims.",
-    evidencePrinciples: [
-      {
-        number: "01",
-        title: "Constraints",
-        detail: "Define the flight envelope and competing requirements.",
-      },
-      {
-        number: "02",
-        title: "Ownership",
-        detail: "Separate confirmed contribution from team context.",
-      },
-      {
-        number: "03",
-        title: "Testing",
-        detail: "Connect decisions to checks, data, and acceptance criteria.",
-      },
-      {
-        number: "04",
-        title: "Iteration",
-        detail: "Record what changed and what the next build should improve.",
-      },
-    ],
+      "Aerospace Engineering student at Mississippi State University working across high-powered rocketry, avionics, embedded systems, software infrastructure, and live technical operations.",
   },
   about: {
     paragraphs: [
       "I am an Aerospace Engineering student at Mississippi State University and a member of the Shackouls Honors College. My interests include astronautics, spacecraft systems, avionics, embedded systems, systems integration, and engineering test.",
-      "My technical foundation includes two high-powered SystemsGo rocketry challenges, a custom Raspberry Pi flight computer programmed in Python, software and infrastructure work centered on reliability and debugging, and technical theatre operations that demanded live troubleshooting and coordination. I continue to support younger high-school rocketry teams in a smaller mentoring capacity.",
+      "My work includes two high-powered SystemsGo rocketry challenges, a custom Raspberry Pi flight computer programmed in Python, software infrastructure, and technical theatre operations spanning live troubleshooting and coordination. I continue to mentor younger high-school rocketry teams on an occasional basis.",
     ],
     focusAreas: [
       "Astronautics",
@@ -152,7 +129,7 @@ export const portfolio: PortfolioContent = {
         year: "SystemsGo",
         title: "High-powered rocketry",
         detail:
-          "Built through two distinct design challenges: avionics-focused Tsiolkovsky and constrained supersonic Oberth.",
+          "Completed two distinct design challenges: avionics-focused Tsiolkovsky and constrained supersonic Oberth.",
       },
       {
         year: "Technical theatre",
@@ -170,7 +147,7 @@ export const portfolio: PortfolioContent = {
         year: "Current",
         title: "Aerospace study and mentoring",
         detail:
-          "Building university-level aerospace experience while continuing occasional rocketry support and STEM outreach.",
+          "Studying Aerospace Engineering at Mississippi State University while continuing occasional rocketry mentoring and STEM outreach.",
       },
     ],
   },
@@ -181,7 +158,7 @@ export const portfolio: PortfolioContent = {
       title: "SystemsGo Tsiolkovsky Challenge — High-Powered Rocket & Flight Computer",
       shortTitle: "Tsiolkovsky flight computer",
       summary:
-        "A high-powered rocketry project centered on a custom Raspberry Pi flight computer programmed in Python, with data acquisition, telemetry, onboard video, and airframe integration still documented through verified evidence as it becomes available.",
+        "A high-powered rocketry project centered on a custom Raspberry Pi flight computer programmed in Python for data acquisition, telemetry, and onboard video.",
       category: "Rocketry & avionics",
       timeframe: "SystemsGo high-school design challenge",
       featured: true,
@@ -205,7 +182,6 @@ export const portfolio: PortfolioContent = {
           label: "Context",
           body: [
             "Tsiolkovsky was a SystemsGo high-powered rocketry challenge combining vehicle work with an avionics and software problem.",
-            "The project is presented as an early hardware-software integration case study, not as a substitute for later university project ownership.",
           ],
         },
         {
@@ -239,19 +215,9 @@ export const portfolio: PortfolioContent = {
           label: "Testing & verification",
           body: [
             "Ground-test and launch-preparation evidence will establish how each subsystem was checked before flight and what acceptance criteria were used.",
-            "The current record intentionally avoids inventing sampling rates, power draw, dimensions, budgets, flight data, or launch outcomes.",
           ],
           verificationNote:
             "Add verified ground-test procedures, launch preparation notes, and flight data or result documentation.",
-        },
-        {
-          id: "iteration",
-          label: "Iteration",
-          body: [
-            "Failures, near-failures, and redesign decisions belong in the evidence record once they can be tied to test notes, photos, or flight data.",
-          ],
-          verificationNote:
-            "Document what changed after testing and what would be redesigned today.",
         },
       ],
       evidence: [
@@ -323,7 +289,6 @@ export const portfolio: PortfolioContent = {
           label: "Contribution record",
           body: [
             "The project record will identify verified work in design, fabrication, integration, testing, or analysis as source material is gathered.",
-            "It does not assign unverified individual ownership or use a generic title in place of a documented contribution.",
           ],
           verificationNote:
             "Add a verified account of the specific design, fabrication, integration, testing, or analysis work completed.",
@@ -333,7 +298,6 @@ export const portfolio: PortfolioContent = {
           label: "Design tradeoffs",
           body: [
             "The design process focused on tradeoffs between speed and altitude while preserving stability, structural integrity, recovery, and safety.",
-            "Lessons from the earlier Tsiolkovsky project can be documented once they are connected to records from the actual design and test cycle.",
           ],
         },
         {
@@ -341,17 +305,9 @@ export const portfolio: PortfolioContent = {
           label: "Testing & verification",
           body: [
             "CAD, simulation, calculations, drawings, construction media, or test evidence should establish how the design was evaluated.",
-            "The current content does not claim a launch result or test result without a verified record.",
           ],
           verificationNote:
             "Add verified analysis, test conditions, launch result, and lessons learned from the design/test cycle.",
-        },
-        {
-          id: "reflection",
-          label: "Reflection",
-          body: [
-            "The project demonstrates why constrained engineering is more credible than a single peak metric: design choices must work together in the real flight envelope.",
-          ],
         },
       ],
       evidence: [
@@ -377,7 +333,7 @@ export const portfolio: PortfolioContent = {
       title: "Product Data & Systems Migration — Alphalete Athletics",
       shortTitle: "Alphalete systems migration",
       summary:
-        "Supported the consolidation of distributed product information into a more consistent shared workflow while also helping deploy desktop systems and support operations at scale.",
+        "Organized product information covering more than 21,000 items and helped configure and deploy 20 desktop systems across three divisions.",
       category: "Professional systems & operations",
       timeframe: "Alphalete Athletics internship",
       featured: true,
@@ -416,7 +372,7 @@ export const portfolio: PortfolioContent = {
           label: "Contribution",
           body: [
             "Contributed to the migration toward a centralized digital product-management system by helping move previously distributed product information into a more consistent shared workflow.",
-            "The work can be described as organizing existing data, validating records, mapping information, and supporting adoption where accurate; it does not claim migration leadership.",
+            "Work included organizing existing data, validating records, mapping information, and supporting adoption.",
           ],
         },
         {
@@ -424,23 +380,14 @@ export const portfolio: PortfolioContent = {
           label: "Systems support",
           body: [
             "Helped configure and deploy 20 desktop systems across three company divisions, including hardware and software setup, asset tracking, and basic network-related support.",
-            "The technical story connects physical product operations, digital product data, and the supporting systems needed for a consistent workflow.",
+            "This work connected physical product operations, digital product data, and the desktop systems used across the company.",
           ],
-        },
-        {
-          id: "testing",
-          label: "Validation",
-          body: [
-            "Record organization, validation, mapping, deployment, and adoption support provide the structure for a future non-proprietary verification narrative.",
-          ],
-          verificationNote:
-            "Add a sanitized old-to-new workflow diagram and confirmed quality checks without exposing proprietary information.",
         },
         {
           id: "result",
           label: "Result",
           body: [
-            "The verified outcome is a contribution to a more consistent shared product-information workflow and support for desktop deployment across three divisions.",
+            "The migration moved distributed product information toward a consistent shared workflow and supported desktop deployment across three divisions.",
           ],
         },
       ],
@@ -467,7 +414,7 @@ export const portfolio: PortfolioContent = {
       title: "Containerized Infrastructure & Software Systems",
       shortTitle: "Containerized infrastructure",
       summary:
-        "Independent technical systems work focused on Linux, Docker, CI/CD, deployments, monitoring, networking, runtime debugging, and reliable operations without linking a private alias.",
+        "Independent work maintaining private services with Linux, Docker, CI/CD, deployments, monitoring, networking, and runtime debugging.",
       category: "Software infrastructure",
       timeframe: "Independent technical systems work",
       featured: false,
@@ -489,7 +436,6 @@ export const portfolio: PortfolioContent = {
           id: "context",
           label: "Context",
           body: [
-            "This independent systems project is supporting evidence of systems thinking, reliability work, debugging, and automation; it is not intended to dominate the aerospace portfolio.",
             "The public write-up remains under the real-name portfolio without linking a private project alias or account.",
           ],
         },
@@ -497,7 +443,6 @@ export const portfolio: PortfolioContent = {
           id: "constraints",
           label: "Operating constraints",
           body: [
-            "Real services require consistent deployments, failure response, configuration management, monitoring, networking, and runtime diagnosis.",
             "Public evidence must be sanitized so that service identities, credentials, private configuration, and unrelated community context remain private.",
           ],
         },
@@ -505,30 +450,14 @@ export const portfolio: PortfolioContent = {
           id: "ownership",
           label: "Responsibilities",
           body: [
-            "The project covers maintaining services, responding to failures, managing consistent deployments, and improving reliability through operational practice.",
+            "Responsibilities included maintaining services, responding to failures, and managing deployments.",
           ],
         },
         {
           id: "implementation",
           label: "Technical implementation",
           body: [
-            "Work is framed through Linux, Docker, CI/CD, automated deployments, configuration management, monitoring, networking, runtime debugging, and software or plugin development where relevant.",
-          ],
-        },
-        {
-          id: "testing",
-          label: "Operational verification",
-          body: [
-            "Deployment-flow diagrams, sanitized metrics, screenshots, and representative code can show how changes were evaluated without relying on a public identity link.",
-          ],
-          verificationNote:
-            "Add sanitized architecture, deployment, monitoring, and incident-debugging evidence before claiming specific reliability improvements.",
-        },
-        {
-          id: "reflection",
-          label: "Reflection",
-          body: [
-            "The systems perspective transfers to engineering work: dependable behavior comes from interfaces, observability, repeatable deployment, and disciplined debugging.",
+            "The stack includes Linux, Docker, CI/CD, automated deployments, configuration management, monitoring, networking, runtime debugging, and software or plugin development.",
           ],
         },
       ],
@@ -555,17 +484,17 @@ export const portfolio: PortfolioContent = {
       title: "Product Data & Systems Migration Support",
       organization: "Alphalete Athletics",
       summary:
-        "Contributed to product-data consolidation, systems migration support, and IT deployment work in a high-volume apparel operation.",
+        "Product-data consolidation and desktop deployment work for Alphalete Athletics.",
       details: [
         "Helped organize and manage product information covering more than 21,000 items, colors, and product/color variant sales.",
-        "Contributed to a centralized digital product-management workflow without claiming migration leadership.",
+        "Contributed to a centralized digital product-management workflow.",
         "Helped configure and deploy 20 desktop systems across three company divisions.",
       ],
     },
   ],
   theatre: {
     summary:
-      "Technical theatre is curated as evidence of live technical operations, troubleshooting, coordination, leadership, and systems work under pressure.",
+      "Head Technician and Student Assistant Director work spanning lighting, sound, cue execution, troubleshooting, crew leadership, and production coordination.",
     highlights: [
       "Head Technician work across lighting, sound, cue execution, troubleshooting, and crew leadership.",
       "Student Assistant Director coordination, scheduling, communication, and work under hard deadlines.",
@@ -575,7 +504,7 @@ export const portfolio: PortfolioContent = {
   },
   outreach: {
     summary:
-      "Ongoing rocketry support is presented as occasional mentoring rather than formal employment, alongside elementary STEM outreach involving rockets and aerodynamics.",
+      "Occasional mentoring for younger SystemsGo rocketry teams, plus elementary STEM outreach focused on rockets and aerodynamics.",
     details: [
       "Support younger high-school teams with design review, avionics guidance, debugging, fabrication, or launch preparation where appropriate.",
       "Use elementary STEM outreach to communicate rocketry and aerodynamics concepts.",

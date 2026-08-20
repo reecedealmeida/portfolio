@@ -1,11 +1,12 @@
 :root {
-  --paper: #f4f0e8;
-  --paper-raised: #fbf9f4;
-  --ink: #102a43;
-  --ink-soft: #526478;
-  --line: #d7d0c4;
-  --accent: #d85f35;
-  --accent-dark: #a94020;
+  --paper: #f7f7f4;
+  --paper-raised: #ffffff;
+  --ink: #171a1d;
+  --ink-soft: #646a70;
+  --line: #d9dcde;
+  --accent: #315f78;
+  --accent-dark: #23475b;
+  --wash: #e9f0f4;
   --max-width: 80rem;
   --header-height: 5.5rem;
   --page-pad: clamp(1.25rem, 4vw, 4.5rem);
@@ -26,7 +27,7 @@ body {
   color: var(--ink);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
   font-size: 1rem;
-  line-height: 1.6;
+  line-height: 1.65;
   text-rendering: optimizeLegibility;
 }
 
@@ -34,7 +35,6 @@ main {
   min-height: 70vh;
 }
 
-body,
 button,
 input,
 textarea,
@@ -122,9 +122,9 @@ button {
 }
 
 .site-brand__name {
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display), Arial, Helvetica, sans-serif;
   font-size: clamp(1.5rem, 2.2vw, 2rem);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .site-brand__title {
@@ -207,10 +207,10 @@ button {
 .display-title,
 .section-title {
   margin: 0;
-  font-family: var(--font-display), Georgia, serif;
-  font-weight: 600;
-  letter-spacing: -0.025em;
-  line-height: 0.95;
+  font-family: var(--font-display), Arial, Helvetica, sans-serif;
+  font-weight: 650;
+  letter-spacing: -0.045em;
+  line-height: 1;
 }
 
 .display-title {
@@ -247,6 +247,7 @@ aside[id] {
   min-height: 2.8rem;
   padding: 0.65rem 1rem;
   border: 1px solid var(--ink);
+  border-radius: 0.15rem;
   background: var(--ink);
   color: var(--paper-raised);
   font-size: 0.78rem;
@@ -285,9 +286,10 @@ aside[id] {
   display: inline-flex;
   padding: 0.25rem 0.55rem;
   border: 1px solid var(--line);
+  background: var(--paper-raised);
   color: var(--ink-soft);
   font-size: 0.72rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -342,7 +344,7 @@ aside[id] {
 }
 
 .home-hero .display-title {
-  max-width: 12ch;
+  max-width: 16ch;
   margin-top: 1.1rem;
 }
 
@@ -409,8 +411,8 @@ aside[id] {
   aspect-ratio: 16 / 10;
   overflow: hidden;
   margin: 0;
-  border: 1px solid color-mix(in srgb, var(--ink) 22%, transparent);
-  background: var(--ink);
+  border: 1px solid var(--line);
+  background: var(--wash);
 }
 
 .project-visual__svg {
@@ -420,30 +422,30 @@ aside[id] {
 }
 
 .project-visual__field {
-  fill: #173b59;
+  fill: #315f78;
 }
 
 [data-visual-variant="oberth"] .project-visual__field {
-  fill: #a94020;
+  fill: #4f6f80;
 }
 
 [data-visual-variant="alphalete"] .project-visual__field {
-  fill: #3f5c52;
+  fill: #6e7f85;
 }
 
 [data-visual-variant="infrastructure"] .project-visual__field {
-  fill: #282f3f;
+  fill: #27343a;
 }
 
 .project-visual__grid {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.12);
+  stroke: rgba(255, 255, 255, 0.14);
   stroke-width: 1;
 }
 
 .project-visual__marks {
   fill: none;
-  stroke: #f4f0e8;
+  stroke: #f7f7f4;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 8;
@@ -479,7 +481,7 @@ aside[id] {
 
 .project-card__title {
   margin: 2.5rem 0 1rem;
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display), Arial, Helvetica, sans-serif;
   font-size: clamp(1.65rem, 2.7vw, 2.35rem);
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -529,7 +531,7 @@ aside[id] {
 
 .theatre-feature h3 {
   margin: 0;
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display), Arial, Helvetica, sans-serif;
   font-size: clamp(1.8rem, 3.5vw, 3rem);
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -576,12 +578,13 @@ aside[id] {
 }
 
 .contact-cta {
-  background: var(--ink);
-  color: var(--paper-raised);
+  border-block: 1px solid var(--line);
+  background: var(--wash);
+  color: var(--ink);
 }
 
 .contact-cta .eyebrow {
-  color: #ef9a72;
+  color: var(--accent-dark);
 }
 
 .contact-cta__action {
@@ -591,7 +594,7 @@ aside[id] {
 .contact-cta__action p {
   max-width: 32rem;
   margin-top: 0;
-  color: #c6d0da;
+  color: var(--ink-soft);
 }
 
 .contact-cta__links {
@@ -602,28 +605,23 @@ aside[id] {
 }
 
 .contact-cta__links .text-link {
-  color: #ef9a72;
+  color: var(--accent);
 }
 
 .contact-cta__links .text-link:hover,
 .contact-cta__links .text-link:focus-visible {
-  color: var(--paper-raised);
+  color: var(--ink);
 }
 
 .contact-cta__links .text-link:focus-visible {
-  outline-color: #ef9a72;
-}
-
-.contact-cta .button {
-  border-color: var(--paper-raised);
-  background: var(--paper-raised);
-  color: var(--ink);
+  outline-color: var(--accent);
 }
 
 .contact-cta .button:hover,
 .contact-cta .button:focus-visible {
-  border-color: #ef9a72;
-  background: #ef9a72;
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--paper-raised);
 }
 
 .projects-index .display-title {
@@ -721,7 +719,7 @@ aside[id] {
 
 .about-timeline h3 {
   margin: 0;
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display), Arial, Helvetica, sans-serif;
   font-size: clamp(1.35rem, 2.25vw, 2rem);
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -794,7 +792,7 @@ aside[id] {
 .theatre-support h2 {
   max-width: 9ch;
   margin: 0.75rem 0 0;
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display), Arial, Helvetica, sans-serif;
   font-size: clamp(1.8rem, 3.2vw, 3rem);
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -936,7 +934,7 @@ aside[id] {
 .case-study__visual h2,
 .case-study__evidence h2 {
   margin: 0 0 1.5rem;
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display), Arial, Helvetica, sans-serif;
   font-size: clamp(2rem, 4vw, 3.5rem);
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -1078,7 +1076,7 @@ aside[id] {
 
 .evidence-needed h3 {
   margin: 0.5rem 0;
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display), Arial, Helvetica, sans-serif;
   font-size: 1.7rem;
   font-weight: 600;
   line-height: 1;
@@ -1123,7 +1121,7 @@ aside[id] {
 
 .next-project__link strong {
   margin-top: 0.35rem;
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display), Arial, Helvetica, sans-serif;
   font-size: clamp(2rem, 5vw, 4.5rem);
   font-weight: 600;
   letter-spacing: -0.02em;

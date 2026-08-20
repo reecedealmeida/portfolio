@@ -9,13 +9,9 @@ export function ContactCta() {
       <div className="shell contact-cta__inner">
         <div>
           <p className="eyebrow">Contact</p>
-          <h2 className="section-title">Interested in the work behind the evidence?</h2>
+          <h2 className="section-title">Get in touch</h2>
         </div>
         <div className="contact-cta__action">
-          <p>
-            Explore the case studies, then use the contact page for current professional
-            details.
-          </p>
           <Link className="button" href="/contact">
             Start a conversation
           </Link>

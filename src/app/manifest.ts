@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: portfolio.person.name,
     description: portfolio.site.description,
     display: "standalone",
-    theme_color: "#f4f0e8",
-    background_color: "#f4f0e8",
+    theme_color: "#f7f7f4",
+    background_color: "#f7f7f4",
   };
 }

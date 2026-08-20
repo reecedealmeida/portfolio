@@ -11,6 +11,11 @@ type CaseStudyProps = {
   project: Project;
 };
 
+const diagramTitles = {
+  "flight-computer": "Flight-computer data flow",
+  "alphalete-flow": "Product-data workflow",
+} satisfies Record<NonNullable<Project["diagram"]>, string>;
+
 function ProjectDiagram({ diagram }: Pick<Project, "diagram">) {
   if (diagram === "flight-computer") {
     return <FlightComputerDiagram />;
@@ -113,7 +118,7 @@ export function CaseStudy({ project }: CaseStudyProps) {
                 id="system-view"
               >
                 <p className="eyebrow">System view</p>
-                <h2 id="system-view-title">A concise view of the workflow.</h2>
+                <h2 id="system-view-title">{diagramTitles[project.diagram]}</h2>
                 <DiagramScroller>
                   <ProjectDiagram diagram={project.diagram} />
                 </DiagramScroller>
@@ -126,7 +131,7 @@ export function CaseStudy({ project }: CaseStudyProps) {
               id="evidence"
             >
               <p className="eyebrow">Evidence record</p>
-              <h2 id="evidence-title">What supports this case study.</h2>
+              <h2 id="evidence-title">Evidence</h2>
               <div className="evidence-grid">
                 {project.evidence.map((item) => (
                   <EvidenceFrame item={item} key={item.title} />

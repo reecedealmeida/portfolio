@@ -6,10 +6,10 @@ import HomePage from "./page";
 afterEach(cleanup);
 
 describe("HomePage", () => {
-  it("leads with the approved headline and strongest work", () => {
+  it("leads with Reece's name and strongest work", () => {
     render(<HomePage />);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "Engineering through building, testing, and iteration.",
+      "Reece DeAlmeida.",
     );
     expect(screen.getByRole("link", { name: /Tsiolkovsky/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Oberth/i })).toBeInTheDocument();
@@ -20,6 +20,8 @@ describe("HomePage", () => {
 
   it("prioritizes visual selected work over abstract principles", () => {
     render(<HomePage />);
+    expect(screen.getByRole("heading", { level: 2, name: "Projects" }))
+      .toBeInTheDocument();
     expect(document.querySelectorAll(".project-visual").length).toBeGreaterThanOrEqual(2);
     expect(screen.queryByText("Working principles")).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Technical theatre systems and leadership/i }))
