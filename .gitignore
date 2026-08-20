@@ -1,4 +1,5 @@
 .superpowers/
+.worktrees/
 .codex-brief-render/
 node_modules/
 .pnpm-store/
