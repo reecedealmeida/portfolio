@@ -4,6 +4,7 @@ import { DiagramScroller } from "@/components/diagram-scroller";
 import { AlphaleteFlowDiagram } from "@/components/diagrams/alphalete-flow";
 import { FlightComputerDiagram } from "@/components/diagrams/flight-computer";
 import { EvidenceFrame } from "@/components/evidence-frame";
+import { ProjectVisual } from "@/components/project-visual";
 import { portfolio, type Project } from "@/content/portfolio";
 
 type CaseStudyProps = {
@@ -53,6 +54,9 @@ export function CaseStudy({ project }: CaseStudyProps) {
                 <dd>{project.tags.join(" · ")}</dd>
               </div>
             </dl>
+          </div>
+          <div className="shell case-study__hero-visual">
+            <ProjectVisual visual={project.visual} />
           </div>
         </header>
 
@@ -133,12 +137,21 @@ export function CaseStudy({ project }: CaseStudyProps) {
         </div>
 
         <nav aria-label="Next project" className="next-project section section--line">
-          <Link className="shell next-project__link" href={`/projects/${nextProject.slug}`}>
-            <span>
+          <Link
+            aria-label={`Next project: ${nextProject.shortTitle}`}
+            className="shell next-project__link"
+            href={`/projects/${nextProject.slug}`}
+          >
+            <span className="next-project__copy">
               <span className="eyebrow">Next project</span>
               <strong>{nextProject.shortTitle}</strong>
+              <span>View case study ↗</span>
             </span>
-            <span aria-hidden="true">↗</span>
+            <ProjectVisual
+              className="next-project__visual"
+              decorative
+              visual={nextProject.visual}
+            />
           </Link>
         </nav>
       </article>
