@@ -31,6 +31,74 @@ test("recruiter can reach the two primary case studies", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Oberth");
 });
 
+test("project work is visual, alternating on desktop, and stacked without overflow on mobile", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/");
+
+  const desktopRows = page.locator(".project-card");
+  await expect(desktopRows).toHaveCount(3);
+  await expect(desktopRows.nth(1)).toHaveClass(/project-card--reverse/);
+  await expect(desktopRows.first().locator(".project-visual")).toBeVisible();
+
+  const visualRatio = await desktopRows.first().locator(".project-visual").evaluate((element) => {
+    const box = element.getBoundingClientRect();
+    return box.width / box.height;
+  });
+  expect(visualRatio).toBeGreaterThan(1.5);
+  expect(visualRatio).toBeLessThan(1.7);
+
+  const [standardRow, reverseRow] = await desktopRows.evaluateAll((rows) =>
+    rows.slice(0, 2).map((row) => {
+      const visual = row.querySelector(".project-visual")!.getBoundingClientRect();
+      const content = row.querySelector(".project-card__content")!.getBoundingClientRect();
+      return {
+        visualLeft: visual.left,
+        visualRight: visual.right,
+        contentLeft: content.left,
+        contentRight: content.right,
+      };
+    }),
+  );
+  expect(standardRow.visualRight).toBeLessThan(standardRow.contentLeft);
+  expect(reverseRow.contentRight).toBeLessThan(reverseRow.visualLeft);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.reload();
+  const mobileMetrics = await desktopRows.first().evaluate((element) => {
+    const visual = element.querySelector(".project-visual")!;
+    const content = element.querySelector(".project-card__content")!;
+    return {
+      visualTop: visual.getBoundingClientRect().top,
+      contentTop: content.getBoundingClientRect().top,
+      pageClientWidth: document.documentElement.clientWidth,
+      pageScrollWidth: document.documentElement.scrollWidth,
+    };
+  });
+
+  expect(mobileMetrics.visualTop).toBeLessThan(mobileMetrics.contentTop);
+  expect(mobileMetrics.pageScrollWidth).toBe(mobileMetrics.pageClientWidth);
+});
+
+test("reduced motion removes project thumbnail scale and transition", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+
+  const projectCard = page.locator(".project-card").first();
+  await projectCard.hover();
+  const motion = await projectCard.locator(".project-visual__svg").evaluate((visual) => {
+    const style = getComputedStyle(visual);
+    return {
+      transform: style.transform,
+      transitionDuration: style.transitionDuration,
+    };
+  });
+
+  expect(motion.transform).toBe("none");
+  expect(motion.transitionDuration).toBe("0s");
+});
+
 test("missing assets are explicit and never broken", async ({ page }) => {
   await page.goto("/contact");
   await expect(page.getByText(/Contact details are ready to add/i)).toBeVisible();
