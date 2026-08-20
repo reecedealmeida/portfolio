@@ -23,6 +23,17 @@ export type CaseStudySection = {
   verificationNote?: string;
 };
 
+export type ProjectVisualVariant =
+  | "tsiolkovsky"
+  | "oberth"
+  | "alphalete"
+  | "infrastructure";
+
+export type ProjectVisual = {
+  variant: ProjectVisualVariant;
+  alt: string;
+};
+
 export type Project = {
   slug: string;
   number: string;
@@ -36,6 +47,7 @@ export type Project = {
   sections: CaseStudySection[];
   evidence: EvidenceItem[];
   diagram?: "flight-computer" | "alphalete-flow";
+  visual: ProjectVisual;
 };
 
 export type SocialLink = {
@@ -83,6 +95,7 @@ export const portfolio: PortfolioContent = {
     description:
       "Evidence-first aerospace engineering portfolio focused on rocketry, avionics, embedded systems, and technical operations.",
   },
+  // Configuration block: add professional destinations before publishing.
   social: [
     { label: "Email", href: "" },
     { label: "LinkedIn", href: "" },
@@ -182,6 +195,10 @@ export const portfolio: PortfolioContent = {
         "Rocketry",
       ],
       diagram: "flight-computer",
+      visual: {
+        variant: "tsiolkovsky",
+        alt: "Technical illustration of a high-powered rocket, onboard flight computer, and telemetry path.",
+      },
       sections: [
         {
           id: "context",
@@ -280,6 +297,10 @@ export const portfolio: PortfolioContent = {
         "Testing",
         "Technical problem solving",
       ],
+      visual: {
+        variant: "oberth",
+        alt: "Technical illustration of a constrained rocket airframe with a Mach marker and trajectory grid.",
+      },
       sections: [
         {
           id: "context",
@@ -369,6 +390,10 @@ export const portfolio: PortfolioContent = {
         "Technical support",
       ],
       diagram: "alphalete-flow",
+      visual: {
+        variant: "alphalete",
+        alt: "Technical illustration of product records moving through a centralized data workflow.",
+      },
       sections: [
         {
           id: "context",
@@ -446,6 +471,10 @@ export const portfolio: PortfolioContent = {
       category: "Software infrastructure",
       timeframe: "Independent technical systems work",
       featured: false,
+      visual: {
+        variant: "infrastructure",
+        alt: "Technical illustration of containerized services, network paths, and monitoring signals.",
+      },
       tags: [
         "Linux",
         "Docker",

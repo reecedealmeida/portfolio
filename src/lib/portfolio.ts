@@ -11,3 +11,7 @@ export function getProjectSlugs(): string[] {
 export function visibleSocialLinks(): SocialLink[] {
   return portfolio.social.filter((item) => item.href.trim().length > 0);
 }
+
+export function getSocialLink(label: SocialLink["label"]): SocialLink | undefined {
+  return visibleSocialLinks().find((item) => item.label === label);
+}

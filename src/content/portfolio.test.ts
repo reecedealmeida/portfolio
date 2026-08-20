@@ -27,6 +27,18 @@ describe("portfolio content", () => {
     ).toBe(true);
   });
 
+  it("assigns a distinct configured visual to every project", () => {
+    expect(portfolio.projects.map((project) => project.visual.variant)).toEqual([
+      "tsiolkovsky",
+      "oberth",
+      "alphalete",
+      "infrastructure",
+    ]);
+    expect(
+      portfolio.projects.every((project) => project.visual.alt.trim().length > 0),
+    ).toBe(true);
+  });
+
   it("does not publish unverified university or research work", () => {
     expect(portfolio.projects.map((project) => project.slug)).not.toContain(
       "university-research",
